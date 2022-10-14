@@ -1,14 +1,27 @@
+#pragma once
 #include <iostream>
+#include <iomanip>
 #include <cmath>
 #include <string>
+#include <vector>
+#include <fstream>
 
-
+using	std::cout;
+using	std::cin;
+using	std::endl;
+using	std::setw;
+using	std::setprecision;
+using	std::fixed;
+using	std::left;
+using	std::right;
+using	std::string;
+using	std::vector;
+using   std::ifstream;
+using   std::ofstream;
 
 using namespace std;
 
-//-----------------------------------------------------------------------------
 
-// Class prototype
 
 class student {
 private:
@@ -20,27 +33,45 @@ private:
     int exam;
     bool nd_passed();
 public:
-    void set(string, string, int, int, int, int);
+    void set_data(string, string, int, int, int, int);
     void print();
     int final_grade();
+    void getgrade() {
+        cin >> id_name;
+        cin >> id_surname;
+        cin >> nd1;
+        cin >> nd2;
+        cin >> nd3;
+        cin >> exam;
+    }
+    void gradeprint() {
+        cout << id_name << "/" << id_surname << "/" << nd1 << "/" << nd2 << "/" << nd3 << "/" << exam;
+
+    }
+
 };
 
-// All methods are implemented below the main function
 
-//-----------------------------------------------------------------------------
+
 
 int main() {
-    student stud;
+    
+    
+    student stud, stud1, stud3;
+       
+        stud.set_data("Audrius", "Ivko", 9, 10, 7, 8);
+        stud1.set_data("Audrius", "Ivko", 7, 8, 9, 10);
+        stud.print(); 
+        stud1.print();
+        stud3.getgrade();
+        stud3.gradeprint();
+       
+    }
+   
 
-    stud.set("Audrius", "Ivko", 4, 9, 7, 8);
-    stud.print();
-}
 
-//-----------------------------------------------------------------------------
 
-// Implemetations of methods of class student
-
-void student::set(string p1, string p2, int p3, int p4, int p5, int p6) {
+void student::set_data(string p1, string p2, int p3, int p4, int p5, int p6) {
     id_name = p1;
     id_surname = p2;
 
@@ -104,13 +135,12 @@ bool student::nd_passed() {
     if (nd1 > 4) k++;
     if (nd2 > 4) k++;
     if (nd3 > 4) k++;
-
-    if (k >= 2) return 1;
+    if (k == 3) return 1;
     else return 0;
 }
 
 int student::final_grade() {
-    if ((nd_passed() == 1) && (exam > 4)) {
+    if ((nd_passed() ) && (exam > 4)) {
         return round((nd1 + nd2 + nd3) / 3.0 * 0.4 + exam * 0.6);
     }
     else {
