@@ -19,7 +19,7 @@ using	std::vector;
 using   std::ifstream;
 using   std::ofstream;
 
-using namespace std;
+
 
 
 
@@ -39,10 +39,10 @@ public:
     void set_data(string, string, double, double, double, double);
     void print();
     double final_grade();
-      
+    ~student() {};
 };
 
-  
+;
 int main() {
     int input_type = 0;
     string id_name, id_surname;
@@ -53,7 +53,8 @@ int main() {
     
 
     if (input_type == 1) {
-cout << "Pavarde" << setw(7) << "Vardas" << setw(7) << "Galotini (Vid.)" << endl;
+        cout << "Pavarde" << setw(17) << "Vardas" << setw(17) << "Galutinis (Vid.)" << endl;
+        cout << "--------------------------------------------------------------------"<<endl;
         stud.set_data("Pavardenis ", "Vaderins", 9.8, 10, 7, 8);
         stud1.set_data("Pavardenis ", "Vaderins", 7, 8, 9, 10);
         stud.print();
@@ -67,7 +68,8 @@ cout << "Pavarde" << setw(7) << "Vardas" << setw(7) << "Galotini (Vid.)" << endl
         cout << "Iveskite atsiskatymo ND2 ivertinima: "; cin >> nd2;
         cout << "Iveskite atsiskatymo ND3 ivertinima: "; cin >> nd3;
         cout << "Iveskite ekzamino ivertinima: "; cin >> exam;
-cout << "Pavarde" << setw(7) << "Vardas" << setw(7) << "Galotini (Vid.)" << endl;
+        cout << "Pavarde" << setw(17) << "Vardas" << setw(27) << "Galutinis (Vid.)" << endl;
+        cout << "--------------------------------------------------------------------" << endl;
         sutudinput.set_data(id_surname, id_name, nd1, nd2, nd3, exam);
         sutudinput.print();
         //cin.get();
@@ -115,7 +117,7 @@ void student::set_data(string p1, string p2, double p3, double p4, double p5, do
 }
 void student::print() {
    
-    cout << id_surname  << "\t| " << id_name << "\t|";
+    cout << id_surname  << setw(17) << id_name << "\t|";
 
     if (nd1 == 0) cout << "N/A" << "\t| ";
     else cout << fixed << setprecision(2) << nd1 << "\t| ";
