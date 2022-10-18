@@ -18,6 +18,12 @@
     <ClCompile Include="SD1_Audrius_Ivko_PIT-21-NT-I.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="funktion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Libray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="funktion.h">
@@ -28,7 +34,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Incoming_data.txt" />
-    <Text Include="Outginig_data.txt" />
+    <Text Include="indata.txt" />
+    <Text Include="outdata.txt" />
   </ItemGroup>
 </Project>

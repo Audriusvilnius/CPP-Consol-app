@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="funktion.cpp" />
+    <ClCompile Include="Libray.cpp" />
     <ClCompile Include="SD1_Audrius_Ivko_PIT-21-NT-I.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -134,8 +136,8 @@
     <ClInclude Include="Library.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Incoming_data.txt" />
-    <Text Include="Outginig_data.txt" />
+    <Text Include="indata.txt" />
+    <Text Include="outdata.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
