@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClInclude Include="funktion.h" />
     <ClInclude Include="Library.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="indata.txt" />

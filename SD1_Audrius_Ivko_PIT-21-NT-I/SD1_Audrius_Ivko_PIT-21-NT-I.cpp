@@ -6,6 +6,9 @@
 #include <vector>
 #include <fstream>
 
+
+
+
 using	std::cout;
 using	std::cin;
 using	std::endl;
@@ -16,146 +19,142 @@ using	std::left;
 using	std::right;
 using	std::string;
 using	std::vector;
-using   std::ifstream;
-using   std::ofstream;
 
 
+
+using namespace std;
 
 
 
 class student {
 private:
-    string id_name;
-    string id_surname;
-    double nd1;
-    double nd2;
-    double nd3;
-    double exam;
-    bool nd_passed();
+	string id_name;
+	string id_surname;
+	vector<double>paz;
+	double nd1;
+	double nd2;
+	double nd3;
+	double exam;
+	bool nd_passed();
 public:
-    
-    student(): id_surname("no surname"), id_name("no name"), nd1(0), nd2(0), nd3(0), exam(0) {}//numatytasis konstruktorius
+	//numatytasis konstruktorius
+	student() : id_surname("no surname"), id_name("no name"), paz(0), exam(0) {}
+	
+	// konstruktorius su  parametrais
 
-    void set_data(string, string, double, double, double, double);
-    void print();
-    double final_grade();
-    ~student() {};
+	student(string new_id_name, string new_id_surname, vector<double>new_nd, double new_exam) :id_name(new_id_name), id_surname(new_id_surname), paz(new_nd), exam(new_exam) {}
+
+	void set_data(string, string, vector<double>, double);
+	void print();
+	double final_grade();
+
+
+	friend class multiply;
+
+	//cin / cout - perdengimas
+	friend ostream& operator<<(ostream& output, const student& set_data) {
+		output << set_data.id_name<< set_data.id_surname << set_data.nd1 << set_data.nd2 << set_data.nd3 << set_data.exam;
+		return output;
+	}
+
+	friend istream& operator>>(istream& input, student& set_data) {
+		char ch = '?';
+		cout << "Studento rezultatai bus ivedami rankiniu budu soauskit 1.\n Generuojami atsitiktine tvarka skauskit 2: ";
+	
+		cout << "Iveskite studento varda:";
+				input >> set_data.id_name;
+		
+			return input;
+
+
+		};
+
+		
+		//input >> set_data.id_name >> set_data.id_surname >> set_data.nd1 >> set_data.nd2 >> set_data.nd3 >> set_data.exam;
+		
+
+	
+
+
+
+	// ~student() {};
 };
 
-;
+class multiply {
+public:
+	static student  student_is(student f1, student f2, student f3, student f4, student f5, student f6) {
+		student r1, r2, r3, r4, r5, r6;
+		r1.id_name = f1.id_name;
+		r2.id_surname = f2.id_surname;
+		r3.nd1 = f3.nd1;
+		r4.nd2 = f4.nd2;
+		r5.nd3 = f5.nd3;
+		r6.exam = f6.exam;
+
+
+	}
+
+};
+
+
+
 int main() {
-    int input_type = 0;
-    string id_name, id_surname;
-    double nd1, nd2, nd3, exam;
-    student stud, stud1, sutudinput;
 
-    cout << "Duomenys ivedimas bus atliekamas is domenu failo spauskit 1, duomenis ivedami is klaviaturos spauskite 2: "; cin >> input_type;
-    
+	
 
-    if (input_type == 1) {
-        cout << "Pavarde" << setw(17) << "Vardas" << setw(17) << "Galutinis (Vid.)" << endl;
-        cout << "--------------------------------------------------------------------"<<endl;
-        stud.set_data("Pavardenis ", "Vaderins", 9.8, 10, 7, 8);
-        stud1.set_data("Pavardenis ", "Vaderins", 7, 8, 9, 10);
-        stud.print();
-        stud1.print();
-    }
-    if (input_type == 2) {
-        
-        cout << "Iveskite studento varda: "; cin >> id_name;
-        cout << "Iveskite studento pavarde: "; cin >> id_surname;
-        cout << "Iveskite atsiskatymo ND1 ivertinima: "; cin >> nd1;
-        cout << "Iveskite atsiskatymo ND2 ivertinima: "; cin >> nd2;
-        cout << "Iveskite atsiskatymo ND3 ivertinima: "; cin >> nd3;
-        cout << "Iveskite ekzamino ivertinima: "; cin >> exam;
-        cout << "Pavarde" << setw(17) << "Vardas" << setw(27) << "Galutinis (Vid.)" << endl;
-        cout << "--------------------------------------------------------------------" << endl;
-        sutudinput.set_data(id_surname, id_name, nd1, nd2, nd3, exam);
-        sutudinput.print();
-        //cin.get();
-    }
- 
- };
-    
-     
-void student::set_data(string p1, string p2, double p3, double p4, double p5, double p6) {
-    id_name = p2;
-    id_surname = p1;
+	
 
-    if (p3 >= 0 && p3 <= 10) {
-        nd1 = p3;
-    }
-    else {
-        nd1 = 0;
-        cout << "ND1 neteisingas ivertis!" << endl;
 
-    }
-    if (p4 >= 0 && p4 <= 10) {
-        nd2 = p4;
-    }
-    else {
-        nd2 = 0;
-        cout << "ND2 neteisingas ivertis!" << endl;
 
-    }
-    if (p5 >= 0 && p5 <= 10) {
-        nd3 = p5;
-    }
-    else {
-        nd3 = 0;
-        cout << "ND3 neteisingas ivertis!" << endl;
 
-    }
-    if (p6 >= 0 && p6 <= 10) {
-        exam = p6;
-    }
-    else {
-        exam = 0;
-        cout << "Egzamino ivertis neteisingas!" << endl;
+	char ch = '?';
+	int option;
+	int in_mean = 0;
+	int in_median = 0;
+	cout << "Studento rezultatai bus ivedami rankiniu budu (y/n): ";
+	cin >> ch;
+	if (ch == 'y') {
 
-    }
+
+	};
+
+	cout << "\nRezultatu pateikimo pasirinkimas:" << endl;
+	cout << "\n\t1. Pagal vidurki;" << endl;
+	cout << "\t2. Pagal mediana;" << endl;
+	cout << "\t3. Pagal madiana ir vidurki;" << endl;
+	cout << "\t4. Nutraukt darba spauskite ""n""." << endl;
+	cout << "\nIveskite pasirinkimo reiksme:";
+	cin >> option;
+	if (ch == 'n') {
+		return 0;
+	};
+	if (option == 1) {
+
+
+	};
+	if (option == 2) {
+		cin >> option;
+
+		student median;
+		median.print();
+
+	};
+	if (option == 3) {
+		cin >> option;
+	};
+	if (option < 1 || option > 3 && ch != 'n') {
+		cout << "\n\tTokio pasirinkimo nera!!!\n\nIveskite is naujo pasirinkima:\n";
+	};
+
+
+
+	return 0;
+};
+
+void student::set_data(string p1, string p2, vector<double>p3, double p4) {
+	id_name = p1;
+	id_surname = p2;
+	vector<double>paz; paz.size();
+
+
 }
-void student::print() {
-   
-    cout << id_surname  << setw(17) << id_name << "\t|";
-
-    if (nd1 == 0) cout << "N/A" << "\t| ";
-    else cout << fixed << setprecision(2) << nd1 << "\t| ";
-
-    if (nd2 == 0) cout << "N/A" << "\t| ";
-    else cout << nd2 << "\t| ";
-
-    if (nd3 == 0) cout << "N/A" << "\t| ";
-    else cout << nd3 << "\t| ";
-
-    if (exam == 0) cout << "N/A" << "\t| ";
-    else cout << exam << "\t| ";
-
-    double fg = final_grade();
-    if (fg == 0) cout << "N/A";
-    else cout << fg;
-
-    cout << endl;
-}
-
-bool student::nd_passed() {
-    int k = 0;
-    if (nd1 > 4) k++;
-    if (nd2 > 4) k++;
-    if (nd3 > 4) k++;
-    if (k == 3) return 1;
-    else return 0;
-}
-
-double student::final_grade() {
-    if ((nd_passed() ) && (exam > 4)) {
-        return ((nd1 + nd2 + nd3) / 3.0 * 0.4 + exam * 0.6);
-    }
-    else {
-        cout << "Galutinis rezultatas nefirmuojamas" << endl;
-        return 0;
-    }
-}
-
-
-
