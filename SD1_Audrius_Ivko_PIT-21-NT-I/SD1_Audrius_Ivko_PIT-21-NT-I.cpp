@@ -9,6 +9,7 @@
 
 
 
+
 using	std::cout;
 using	std::cin;
 using	std::endl;
@@ -30,131 +31,150 @@ class student {
 private:
 	string id_name;
 	string id_surname;
-	vector<double>paz;
-	double nd1;
-	double nd2;
-	double nd3;
+	vector<double>nd;
 	double exam;
-	bool nd_passed();
+	double mean;
+	double median;
+	bool nd_passed;
 public:
 	//numatytasis konstruktorius
-	student() : id_surname("no surname"), id_name("no name"), paz(0), exam(0) {}
-	
+	student() {
+		id_surname = "no surname";
+		id_name = "no name";
+		vector<double>nd = { 0 };
+		exam = 0;
+		mean = 0;
+		median = 0;
+	}
 	// konstruktorius su  parametrais
+	student(string new_id_name, string new_id_surname, vector<double>new_nd, double new_exam) {
+		id_name = new_id_name;
+		id_surname = new_id_surname;
+		vector<double>nd = { new_nd };
+		exam = new_exam;
+	}
 
-	student(string new_id_name, string new_id_surname, vector<double>new_nd, double new_exam) :id_name(new_id_name), id_surname(new_id_surname), paz(new_nd), exam(new_exam) {}
+	void setDataAll(string, string, vector<double>, double);
+	void setDataMean(string, string, vector<double>, double);
+	void setDataMedian(string, string, vector<double>, double);
 
-	void set_data(string, string, vector<double>, double);
-	void print();
-	double final_grade();
+	void printMean();
+	void printMedian();
+	void printAllm();
 
 
-	friend class multiply;
-
+	// kopijavimo konstruktorius
+	//student(const student &original) {
+	//	id_name = original.id_name;
+	//	id_surname = original.id_surname;
+	//	vector<double>nd = original.vector<double>nd;
+	//	exam = original.exam;
+	//	mian = original.mian;
+	//	median = original.median;
+	//}
+	
 	//cin / cout - perdengimas
 	friend ostream& operator<<(ostream& output, const student& set_data) {
-		output << set_data.id_name<< set_data.id_surname << set_data.nd1 << set_data.nd2 << set_data.nd3 << set_data.exam;
+		output << "-------------------------------------------------------------------------------------------------" << endl;
+		output << "|\tVardas" << setw(20) << "|\tPavarde" << setw(20) << "|\tVidurkis" << setw(20) <<"|\tMedianas\t|" << endl;
+		output << "-------------------------------------------------------------------------------------------------" << endl;
+		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) <<set_data.mean << setw(20) << set_data.median << endl;
 		return output;
 	}
 
 	friend istream& operator>>(istream& input, student& set_data) {
-		char ch = '?';
-		cout << "Studento rezultatai bus ivedami rankiniu budu soauskit 1.\n Generuojami atsitiktine tvarka skauskit 2: ";
+		char ch = '?'; 	
+		double ndv=0;
+		cout << "Studento rezultatai bus ivedami rankiniu budu spauskit (y/n)";
+		cin >> ch;
+		cout << "\nGeneruojami atsitiktine tvarka skauskit (y/n)"<<endl;
+		cin >> ch;
+		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal vidurki spauskite 3" << endl;
+		cin >> ch;
+		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal mediana spauskite 4" << endl;
+		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal vidurki ir mediana spauskite 5" <<endl;
 	
-		cout << "Iveskite studento varda:";
+		cout << "\nIveskite studento varda:";
 				input >> set_data.id_name;
+				cout << "\nIveskite studento pavarde: ";
+				input >> set_data.id_surname;
+				cout << "\nEgzaminno rezultatas:";
+				input >> set_data.exam;
+				cout << "\nIvedinekite namu darbu pazymius,\n baigt ivedima iveskit neigiama reiksme";
+				for(int i=0;ndv<0;i++ ){
+					cin >> ndv;
+					vector<double>nd;
+					
+					set_data.nd.push_back(ndv);
+				};
 		
 			return input;
-
-
 		};
-
-		
-		//input >> set_data.id_name >> set_data.id_surname >> set_data.nd1 >> set_data.nd2 >> set_data.nd3 >> set_data.exam;
-		
-
-	
-
-
-
-	// ~student() {};
+	 ~student() {};
 };
-
-class multiply {
-public:
-	static student  student_is(student f1, student f2, student f3, student f4, student f5, student f6) {
-		student r1, r2, r3, r4, r5, r6;
-		r1.id_name = f1.id_name;
-		r2.id_surname = f2.id_surname;
-		r3.nd1 = f3.nd1;
-		r4.nd2 = f4.nd2;
-		r5.nd3 = f5.nd3;
-		r6.exam = f6.exam;
-
-
-	}
-
-};
-
-
 
 int main() {
 
-	
 
 	
 
 
+	student data1, data2, data3; 
+	data1.setDataAll("Vardas1", "Pavarde1", { 6,7,8,9 }, 8);
+	data2.setDataMean("Vardas2", "Pavarde2", { 6,7,8,9 }, 8);
+	data3.setDataMedian("Vardas3", "Pavarde4", { 6,7,8,9 }, 8);
+	
 
+	vector<student> list;
+	vector<double> temprez  { 6,7,8,9,5,7,6,9 };
+	student temp("Petras", "Petraitis",temprez,6 );
+	list.push_back(temp);
+	for (double i = 0; i < list.size(); i++) {
+		cin >> list[i];
+		cout << list[i];
+	}
 
-	char ch = '?';
-	int option;
-	int in_mean = 0;
-	int in_median = 0;
-	cout << "Studento rezultatai bus ivedami rankiniu budu (y/n): ";
-	cin >> ch;
-	if (ch == 'y') {
+	
+	
 
-
-	};
-
-	cout << "\nRezultatu pateikimo pasirinkimas:" << endl;
-	cout << "\n\t1. Pagal vidurki;" << endl;
-	cout << "\t2. Pagal mediana;" << endl;
-	cout << "\t3. Pagal madiana ir vidurki;" << endl;
-	cout << "\t4. Nutraukt darba spauskite ""n""." << endl;
-	cout << "\nIveskite pasirinkimo reiksme:";
-	cin >> option;
-	if (ch == 'n') {
-		return 0;
-	};
-	if (option == 1) {
-
-
-	};
-	if (option == 2) {
-		cin >> option;
-
-		student median;
-		median.print();
-
-	};
-	if (option == 3) {
-		cin >> option;
-	};
-	if (option < 1 || option > 3 && ch != 'n') {
-		cout << "\n\tTokio pasirinkimo nera!!!\n\nIveskite is naujo pasirinkima:\n";
-	};
-
-
+	
 
 	return 0;
 };
 
-void student::set_data(string p1, string p2, vector<double>p3, double p4) {
-	id_name = p1;
-	id_surname = p2;
-	vector<double>paz; paz.size();
+void student::setDataAll(string new_id_name, string new_id_surname, vector<double>new_nd, double new_exam) {
+
+	double mean(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
+	double median(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
+	}
+void student::setDataMean(string new_id_name, string new_id_surname, vector<double>new_nd, double new_exam) {
+
+	double mean(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
+	double median(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
+}
+void student::setDataMedian(string new_id_name, string new_id_surname, vector<double>new_nd, double new_exam) {
+
+	double mean(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
+	double median(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
+}
 
 
+
+void student::printMean() {
+	cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << endl;;
+	//for (double i = 0; i < paz.size(); i++) {
+	//	cout << paz.at(i);
+	//}
+}
+void student::printMedian() {
+	cout << id_surname << setw(17) << "" << id_name << setw(17) << median << endl;
+	//for (double i = 0; i < paz.size(); i++) {
+	//	cout << paz.at(i);
+	//}
+}
+void student::printAllm() {
+	cout << id_surname << setw(17) << "" << id_name << setw(17)<< mean << setw(17)<< median << endl;
+	//for (double i = 0; i < paz.size(); i++) {
+	//	cout << paz.at(i);
+	//}
 }
