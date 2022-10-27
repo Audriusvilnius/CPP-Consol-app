@@ -85,11 +85,11 @@ public:
 	friend istream& operator>>(istream& input, student& set_data) {
 		char ch = '?'; 	
 		double ndv=0;
-		cout << "Studento rezultatai bus ivedami rankiniu budu spauskit (y/n)";
+		cout << "Studento rezultatai bus ivedami rankiniu budu spauskit (y/n): ";
 		cin >> ch;
-		cout << "\nGeneruojami atsitiktine tvarka skauskit (y/n)"<<endl;
+		cout << "\nGeneruojami atsitiktine tvarka skauskit (y/n): "<<endl;
 		cin >> ch;
-		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal vidurki spauskite 3" << endl;
+		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal vidurki spauskite (y/n): " << endl;
 		cin >> ch;
 		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal mediana spauskite 4" << endl;
 		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal vidurki ir mediana spauskite 5" <<endl;
