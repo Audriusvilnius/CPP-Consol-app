@@ -6,10 +6,6 @@
 #include <vector>
 #include <fstream>
 
-
-
-
-
 using	std::cout;
 using	std::cin;
 using	std::endl;
@@ -20,10 +16,8 @@ using	std::left;
 using	std::right;
 using	std::string;
 using	std::vector;
-
-
-
-using namespace std;
+using	std::ostream;
+using	std::istream;
 
 
 
@@ -31,17 +25,17 @@ class student {
 private:
 	string id_name;
 	string id_surname;
-	vector<double>nd;
+	vector<int>nd;
 	double exam;
+public:
 	double mean;
 	double median;
-	bool nd_passed;
-public:
-	//numatytasis konstruktorius
+
+	//numatytasis konstruktorius vector
 	student() {
 		id_surname = "no surname";
 		id_name = "no name";
-		vector<double>nd = { 0 };
+		vector<int>nd = { 0 };
 		exam = 0;
 		mean = 0;
 		median = 0;
@@ -53,26 +47,16 @@ public:
 		vector<double>nd = { new_nd };
 		exam = new_exam;
 	}
+	//void startMenu(vector<student>insert);
 
-	void setDataAll(string, string, vector<double>, double);
-	void setDataMean(string, string, vector<double>, double);
-	void setDataMedian(string, string, vector<double>, double);
+	void setDataGrade(string, string, vector<int>, double);
+	void setDataMean(string, string, vector<int>, double);
+	void setDataMedian(string, string, vector<int>, double);
 
 	void printMean();
 	void printMedian();
 	void printAllm();
 
-
-	// kopijavimo konstruktorius
-	//student(const student &original) {
-	//	id_name = original.id_name;
-	//	id_surname = original.id_surname;
-	//	vector<double>nd = original.vector<double>nd;
-	//	exam = original.exam;
-	//	mian = original.mian;
-	//	median = original.median;
-	//}
-	
 	//cin / cout - perdengimas
 	friend ostream& operator<<(ostream& output, const student& set_data) {
 		output << "-------------------------------------------------------------------------------------------------" << endl;
@@ -137,44 +121,62 @@ int main() {
 	
 	
 
-	
+		mean = sum / nd.size() * 1.0;
 
-	return 0;
-};
-
-void student::setDataAll(string new_id_name, string new_id_surname, vector<double>new_nd, double new_exam) {
-
-	double mean(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
-	double median(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
+		//return ((mean * 0.4) + (exam * 0.6));
 	}
-void student::setDataMean(string new_id_name, string new_id_surname, vector<double>new_nd, double new_exam) {
+		
+	void student::setDataMean(string new_id_name, string new_id_surname, vector<int>new_nd, double new_exam) {
 
-	double mean(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
-	double median(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
-}
-void student::setDataMedian(string new_id_name, string new_id_surname, vector<double>new_nd, double new_exam) {
+		id_name = new_id_name;
+		id_surname = new_id_surname;
+		vector<int>nd = new_nd;
+		exam = new_exam;
+		double mean = 0;
+		int sum = 0;
 
-	double mean(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
-	double median(vector<double>new_nd, int size);	// nezinau kai cectorio parasyt duomenu nuskaitima
-}
+		while (!nd.size())
+		{
+			sum = sum + nd.back();
+		}
+		mean = sum / nd.size() * 1.0;
+
+		//return mean;
+
+	}
+
+	void student::setDataMedian(string new_id_name, string new_id_surname, vector<int>new_nd, double new_exam) {
+
+		id_name = new_id_name;
+		id_surname = new_id_surname;
+		vector<int>nd = new_nd;
+		exam = new_exam;
+		double median = 0;
+
+		int size = nd.size();
+
+		sort(nd.begin(), nd.end());
+
+		if (size % 2 != 0) {
+			median = nd.at(size / 2);
+		}
+		median = (nd.at(size - 1) / 2 + nd.at(size / 2)) / 2.0;
+
+		//return median;
+
+	}
 
 
+	void student::printMean() {
+		cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << endl;
 
-void student::printMean() {
-	cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << endl;;
-	//for (double i = 0; i < paz.size(); i++) {
-	//	cout << paz.at(i);
-	//}
-}
-void student::printMedian() {
-	cout << id_surname << setw(17) << "" << id_name << setw(17) << median << endl;
-	//for (double i = 0; i < paz.size(); i++) {
-	//	cout << paz.at(i);
-	//}
-}
-void student::printAllm() {
-	cout << id_surname << setw(17) << "" << id_name << setw(17)<< mean << setw(17)<< median << endl;
-	//for (double i = 0; i < paz.size(); i++) {
-	//	cout << paz.at(i);
-	//}
-}
+	}
+	void student::printMedian() {
+
+		cout << id_surname << setw(17) << "" << id_name << setw(17) << median << endl;
+
+	}
+	void student::printAllm() {
+		cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << setw(17) << exam << endl;
+
+	}
