@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <stdlib.h>
+#include <algorithm>
 
 using	std::cout;
 using	std::cin;
@@ -18,7 +20,7 @@ using	std::string;
 using	std::vector;
 using	std::ostream;
 using	std::istream;
-
+using	std::sort;
 
 
 class student {
@@ -47,11 +49,12 @@ public:
 		vector<double>nd = { new_nd };
 		exam = new_exam;
 	}
-	//void startMenu(vector<student>insert);
-
-	void setDataGrade(string, string, vector<int>, double);
-	void setDataMean(string, string, vector<int>, double);
-	void setDataMedian(string, string, vector<int>, double);
+	
+	
+	void setDataMean(vector<int>, double);
+	void setDataMedian(vector<int>, double);
+	void setDataGrade(double, double);
+	void startMenu(vector<int>insert);
 
 	void printMean();
 	void printMedian();
@@ -66,18 +69,19 @@ public:
 		return output;
 	}
 
-	friend istream& operator>>(istream& input, student& set_data) {
-		char ch = '?'; 	
-		double ndv=0;
-		cout << "Studento rezultatai bus ivedami rankiniu budu spauskit (y/n): ";
-		cin >> ch;
-		cout << "\nGeneruojami atsitiktine tvarka skauskit (y/n): "<<endl;
-		cin >> ch;
-		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal vidurki spauskite (y/n): " << endl;
-		cin >> ch;
-		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal mediana spauskite 4" << endl;
-		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal vidurki ir mediana spauskite 5" <<endl;
-	
+	friend istream& operator>>(istream& input, student& set_data) {	
+		int ndv=0;
+		cout << " ----------------------------------------------------------------" << endl;
+		cout << "|                                                                |" << endl;
+		cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+		cout << "|                                                                |" << endl;
+		cout << " ----------------------------------------------------------------" << endl;
+		cout << "| 1. Studento rezultatai bus ivedami rankiniu budu;              |" << endl;
+		cout << "| 2. Importuojami is duomenu failo;                              |" << endl;
+		cout << "| 3. Generuojami is atsitiktiu skaiciu;                          |" << endl;
+		cout << "| 4. Nutraukti darba.                                            |" << endl;
+		cout << " ----------------------------------------------------------------" << endl;
+
 		cout << "\nIveskite studento varda:";
 				input >> set_data.id_name;
 				cout << "\nIveskite studento pavarde: ";
@@ -87,31 +91,21 @@ public:
 				cout << "\nIvedinekite namu darbu pazymius,\n baigt ivedima iveskit neigiama reiksme";
 				for(int i=0;ndv<0;i++ ){
 					cin >> ndv;
-					vector<double>nd;
+					vector<int>nd;
 					
 					set_data.nd.push_back(ndv);
 				};
 		
 			return input;
-		};
+		}
 	 ~student() {};
 };
 
 int main() {
 
-
-	
-
-
-	student data1, data2, data3; 
-	data1.setDataAll("Vardas1", "Pavarde1", { 6,7,8,9 }, 8);
-	data2.setDataMean("Vardas2", "Pavarde2", { 6,7,8,9 }, 8);
-	data3.setDataMedian("Vardas3", "Pavarde4", { 6,7,8,9 }, 8);
-	
-
 	vector<student> list;
-	vector<double> temprez  { 6,7,8,9,5,7,6,9 };
-	student temp("Petras", "Petraitis",temprez,6 );
+	vector<double> temprez{ 6,7,8,9,5,7,6,9 };
+	student temp("Petras", "Petraitis", temprez, 6);
 	list.push_back(temp);
 	for (double i = 0; i < list.size(); i++) {
 		cin >> list[i];
@@ -119,17 +113,12 @@ int main() {
 	}
 
 	
+};
+
 	
 
-		mean = sum / nd.size() * 1.0;
+	void student::setDataMean(vector<int>new_nd, double new_exam) {
 
-		//return ((mean * 0.4) + (exam * 0.6));
-	}
-		
-	void student::setDataMean(string new_id_name, string new_id_surname, vector<int>new_nd, double new_exam) {
-
-		id_name = new_id_name;
-		id_surname = new_id_surname;
 		vector<int>nd = new_nd;
 		exam = new_exam;
 		double mean = 0;
@@ -145,10 +134,8 @@ int main() {
 
 	}
 
-	void student::setDataMedian(string new_id_name, string new_id_surname, vector<int>new_nd, double new_exam) {
+	void student::setDataMedian( vector<int>new_nd, double new_exam) {
 
-		id_name = new_id_name;
-		id_surname = new_id_surname;
 		vector<int>nd = new_nd;
 		exam = new_exam;
 		double median = 0;
@@ -160,12 +147,17 @@ int main() {
 		if (size % 2 != 0) {
 			median = nd.at(size / 2);
 		}
-		median = (nd.at(size - 1) / 2 + nd.at(size / 2)) / 2.0;
+		median = (nd.at(size - 1 )/ 2 + nd.at(size / 2)) / 2.0;
 
 		//return median;
 
 	}
 
+	void student::setDataGrade(double median, double exam) {
+		
+		//return ((mean * 0.4) + (exam * 0.6));
+
+	}
 
 	void student::printMean() {
 		cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << endl;
