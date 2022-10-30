@@ -19,7 +19,7 @@ using	std::right;
 using	std::string;
 using	std::vector;
 using	std::ostream;
-using	std::istream
+using	std::istream;
 
 
 
@@ -50,29 +50,47 @@ public:
 		vector<int>nd = { new_nd };
 		exam = new_exam;
 	}
-	void startMenu(vector<student>insert);
+	//void startMenu(vector<student>insert);
 
 	void setDataGrade(string, string, vector<int>, double);
 	void setDataMean(string, string, vector<int>, double);
 	void setDataMedian(string, string, vector<int>, double);
-	
+
 	void printMean();
 	void printMedian();
 	void printAllm();
 
 	//cin / cout - perdengimas
-	friend istream& operator>>(istream &input, student &set_data) {
-		
-				int index = 0;
-				input >> ndv;
-					while (ndv > -1) {
-						vector<int>nd;
-						input >> ndv;
-						nd.push_back(ndv);
-					};
-	
-			return input;
-		}
+	friend istream& operator>>(istream& input, student& set_data) {
+		char ch = '?';
+		double ndv = 0;
+		cout << "Studento rezultatai bus ivedami rankiniu budu spauskit (y/n)";
+		cin >> ch;
+		cout << "\nGeneruojami atsitiktine tvarka skauskit (y/n)" << endl;
+		cin >> ch;
+		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal vidurki spauskite 3" << endl;
+		cin >> ch;
+		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal mediana spauskite 4" << endl;
+		cout << "\nPateikimas galutinis pazimio skaiciavimas pagal vidurki ir mediana spauskite 5" << endl;
+
+		cout << "\nIveskite studento varda:";
+		input >> set_data.id_name;
+		cout << "\nIveskite studento pavarde: ";
+		input >> set_data.id_surname;
+		cout << "\nEgzaminno rezultatas:";
+		input >> set_data.exam;
+		cout << "\nIvedinekite namu darbu pazymius,\n baigt ivedima iveskit neigiama reiksme";
+		for (int i = 0; ndv < 0; i++) {
+			cin >> ndv;
+			vector<int>nd;
+
+			set_data.nd.push_back(ndv);
+		};
+
+		return input;
+	}
+
+
 
 	friend ostream& operator<<(ostream& output, const student& setMeanMedian) {
 		output << "-------------------------------------------------------------------------------------------------" << endl;
@@ -82,14 +100,19 @@ public:
 		return output;
 	}
 
-	 ~student() {};
+	~student() {};
 };
 
-int main() {
-	vector<student>insert;
-	startMenu(insert);
-	system("pause");
-
+int main()
+{
+	vector<student> list;
+	vector<int> temprez{ 6,7,8,9,5,7,6,9 };
+	student temp("Petras", "Petraitis", temprez, 6);
+	list.push_back(temp);
+	for (int i = 0; i < list.size(); i++) {
+		cin >> list[i];
+		cout << list[i];
+	}
 
 
 	//vector<student> list;
@@ -154,69 +177,11 @@ int main() {
 
 	}
 
-	void student::startMenu(vector<student>insert) {
-
-			cout << " ----------------------------------------------------------------"; << endl;
-			cout << "|                                                                |"; << endl;
-			cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |"; << endl;
-			cout << "|                                                                |"; << endl;
-			cout << " ----------------------------------------------------------------"; << endl;
-			cout << "| 1. Studento rezultatai bus ivedami rankiniu budu;              |"; << endl;
-			cout << "| 2. Importuojami is duomenu failo;                              |"; << endl;
-			cout << "| 3. Generuojami is atsitiktiu skaiciu;                          |"; << endl;
-			cout << "| 4. Nutraukti darba.                                            |"; << endl;
-			cout << " ----------------------------------------------------------------"; << endl;
-		
-		int menuIndex = 0;
-		switch (menuIndex) {
-		case 1:
-			cout << "Ivedimas rankiniu budu";
-			break;
-		case 2:
-			cout << "Impuptojama is failo";
-			break;
-		case 3:
-			cout << "Atsitiktiniu pazymiu generavimas"; 
-		case 4:
-			cout << "Nutraukti";
-			break;	
-			cout << " ----------------------------------------------------------------"; << endl;
-			cout << "|                                                                |"; << endl;
-			cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |"; << endl;
-			cout << "|                                                                |"; << endl;
-			cout << " ----------------------------------------------------------------"; << endl;
-			cout << "| 5. Pateikti galutini iverti vadovaujantis vidurkiu;            |"; << endl;
-			cout << "| 6. Pateikti galutini iverti vadovaujantis medianu;             |"; << endl;
-			cout << " ----------------------------------------------------------------"; << endl;
-		case 5:
-			cout << "Vadovaujantis vidurkiu";
-			break;
-		case 6:
-			cout << "Vadovaujantis medianu";
-			break;
-			cout << " ----------------------------------------------------------------"; << endl;
-			cout << "|                                                                |"; << endl;
-			cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |"; << endl;
-			cout << "|                                                                |"; << endl;
-			cout << " ----------------------------------------------------------------"; << endl;
-			cout << "| 7. Duomenu sarasu isvedimas i ekrana;                          |"; << endl;
-			cout << "| 8. Duomenu sarasu isaugojimas faile;                           |"; << endl;
-			cout << " ----------------------------------------------------------------"; << endl;
-		case 7:
-			cout << "Duomenu isvedimas i ekrana";
-			break;
-		case 8:
-			cout << "Duomenu isaugojimas faile";
-			break;
-		}
-		
-	}
 
 	void student::printMean() {
-		cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << endl;;
+		cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << endl;
 
 	}
-
 	void student::printMedian() {
 
 		cout << id_surname << setw(17) << "" << id_name << setw(17) << median << endl;
