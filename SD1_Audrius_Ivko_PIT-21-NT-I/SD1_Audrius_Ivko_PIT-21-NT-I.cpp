@@ -81,6 +81,48 @@ public:
 		cout << "| 3. Generuojami is atsitiktiu skaiciu;                          |" << endl;
 		cout << "| 4. Nutraukti darba.                                            |" << endl;
 		cout << " ----------------------------------------------------------------" << endl;
+		int menuIndex = 0;
+		switch (menuIndex) {
+		case 1:
+			cout << "Ivedimas rankiniu budu";
+			break;
+		case 2:
+			cout << "Impuptojama is failo";
+			break;
+		case 3:
+			cout << "Atsitiktiniu pazymiu generavimas";
+		case 4:
+			cout << "Nutraukti";
+			break;
+			cout << " ----------------------------------------------------------------" << endl;
+			cout << "|                                                                |" << endl;
+			cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+			cout << "|                                                                |" << endl;
+			cout << " ----------------------------------------------------------------" << endl;
+			cout << "| 5. Pateikti galutini iverti vadovaujantis vidurkiu;            |" << endl;
+			cout << "| 6. Pateikti galutini iverti vadovaujantis medianu;             |" << endl;
+			cout << " ----------------------------------------------------------------" << endl;
+		case 5:
+			cout << "Vadovaujantis vidurkiu";
+			break;
+		case 6:
+			cout << "Vadovaujantis medianu";
+			break;
+			cout << " ----------------------------------------------------------------"<< endl;
+			cout << "|                                                                |" << endl;
+			cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+			cout << "|                                                                |" << endl;
+			cout << " ----------------------------------------------------------------" << endl;
+			cout << "| 7. Duomenu sarasu isvedimas i ekrana;                          |" << endl;
+			cout << "| 8. Duomenu sarasu isaugojimas faile;                           |" << endl;
+			cout << " ----------------------------------------------------------------" << endl;
+		case 7:
+			cout << "Duomenu isvedimas i ekrana";
+			break;
+		case 8:
+			cout << "Duomenu isaugojimas faile";
+			break;
+		}
 
 		cout << "\nIveskite studento varda:";
 				input >> set_data.id_name;
