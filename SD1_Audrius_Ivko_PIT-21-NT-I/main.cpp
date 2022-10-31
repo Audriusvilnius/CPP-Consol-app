@@ -1,26 +1,4 @@
-#pragma once
-#include <iostream>
-#include <iomanip>
-#include <cmath>
-#include <string>
-#include <vector>
-#include <fstream>
-#include <stdlib.h>
-#include <algorithm>
-
-using	std::cout;
-using	std::cin;
-using	std::endl;
-using	std::setw;
-using	std::setprecision;
-using	std::fixed;
-using	std::left;
-using	std::right;
-using	std::string;
-using	std::vector;
-using	std::ostream;
-using	std::istream;
-using	std::sort;
+#include "Header.h"
 
 
 class student {
@@ -161,15 +139,15 @@ public:
 
 int main() {
 
-	vector<student>grade;
-	menu(grade);
-	/*vector<double> temprez{ 6,7,8,9,5,7,6,9 };
+	vector<student>list;
+	
+	vector<double> temprez{ 6,7,8,9,5,7,6,9 };
 	student temp("Petras", "Petraitis", temprez, 6);
 	list.push_back(temp);
 	for (double i = 0; i < list.size(); i++) {
 		cin >> list[i];
 		cout << list[i];
-	}*/
+	}
 
 	
 };

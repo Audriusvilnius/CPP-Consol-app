@@ -127,13 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Libray.cpp" />
-    <ClCompile Include="SD1_Audrius_Ivko_PIT-21-NT-I.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="funktion.h" />
-    <ClInclude Include="Library.h" />
-    <ClInclude Include="Vector.h" />
+    <ClInclude Include="Header.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="indata.txt" />
