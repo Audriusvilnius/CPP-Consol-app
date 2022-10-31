@@ -51,9 +51,9 @@ public:
 	}
 	
 	
-	void setDataMean(vector<int>, double);
-	void setDataMedian(vector<int>, double);
-	void setDataGrade(double, double);
+	double setDataMean(vector<int>, double);
+	double setDataMedian(vector<int>, double);
+	double setDataGrade(double, double);
 	//void startMenu(vector<int>insert);
 
 	void printMean();
@@ -75,7 +75,7 @@ public:
 		cout << "\t|                                                                |" << endl;
 		cout << "\t|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
 		cout << "\t|                                                                |" << endl;
-		cout << " \t----------------------------------------------------------------" << endl;
+		cout << "\t ----------------------------------------------------------------" << endl;
 		cout << "\t| 1. Studento rezultatai bus ivedami rankiniu budu;              |" << endl;
 		cout << "\t| 2. Importuojami is duomenu failo;                              |" << endl;
 		cout << "\t| 3. Generuojami is atsitiktiu skaiciu;                          |" << endl;
@@ -83,10 +83,10 @@ public:
 		cout << "\t ----------------------------------------------------------------" << endl;
 		int menuIndex = 0;
 
-		cout << "\n\tIveskite pasirinkto varianto numeri: ";
-			cin >> menuIndex;
+		cout << "\n\tIveskite pasirinktimo numeri: ";
+		cin >> menuIndex;
 			while (menuIndex > 4 || menuIndex < 1) {
-				cout << "\tTokio varioanto nera iveskite tinkama varianta: ";
+				cout << "\tTokio pasirinkimo nera iveskite tinkama numeri: ";
 				cin >> menuIndex;
 			};
 		system("CLS");
@@ -97,6 +97,9 @@ public:
 			input >> set_data.id_name;
 			cout << "\n\tIveskite studento pavarde:\t";
 			input >> set_data.id_surname;
+			cout << "\n\tIveskite egzamino rezultata:\t";
+			input >> set_data.exam;
+			cout << "\n\tIveskite namu darbu rezultata:\t";
 
 			break;
 		case 2:
@@ -158,21 +161,22 @@ public:
 
 int main() {
 
-	vector<student> list;
-	vector<double> temprez{ 6,7,8,9,5,7,6,9 };
+	vector<student>grade;
+	menu(grade);
+	/*vector<double> temprez{ 6,7,8,9,5,7,6,9 };
 	student temp("Petras", "Petraitis", temprez, 6);
 	list.push_back(temp);
 	for (double i = 0; i < list.size(); i++) {
 		cin >> list[i];
 		cout << list[i];
-	}
+	}*/
 
 	
 };
 
 	
 
-	void student::setDataMean(vector<int>new_nd, double new_exam) {
+	double student::setDataMean(vector<int>new_nd, double new_exam) {
 
 		vector<int>nd = new_nd;
 		exam = new_exam;
@@ -185,11 +189,11 @@ int main() {
 		}
 		mean = sum / nd.size() * 1.0;
 
-		//return mean;
+		return mean;
 
 	}
 
-	void student::setDataMedian( vector<int>new_nd, double new_exam) {
+	double student::setDataMedian( vector<int>new_nd, double new_exam) {
 
 		vector<int>nd = new_nd;
 		exam = new_exam;
@@ -204,13 +208,13 @@ int main() {
 		}
 		median = (nd.at(size - 1 )/ 2 + nd.at(size / 2)) / 2.0;
 
-		//return median;
+		return median;
 
 	}
 
-	void student::setDataGrade(double median, double exam) {
+	double student::setDataGrade(double median, double exam) {
 		
-		//return ((mean * 0.4) + (exam * 0.6));
+		return ((mean * 0.4) + (exam * 0.6));
 
 	}
 

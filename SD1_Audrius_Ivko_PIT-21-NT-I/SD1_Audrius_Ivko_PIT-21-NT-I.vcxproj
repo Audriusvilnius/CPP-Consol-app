@@ -127,7 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="funktion.cpp" />
     <ClCompile Include="Libray.cpp" />
     <ClCompile Include="SD1_Audrius_Ivko_PIT-21-NT-I.cpp" />
   </ItemGroup>
