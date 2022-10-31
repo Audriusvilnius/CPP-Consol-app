@@ -54,7 +54,7 @@ public:
 	void setDataMean(vector<int>, double);
 	void setDataMedian(vector<int>, double);
 	void setDataGrade(double, double);
-	void startMenu(vector<int>insert);
+	//void startMenu(vector<int>insert);
 
 	void printMean();
 	void printMedian();
@@ -70,21 +70,34 @@ public:
 	}
 
 	friend istream& operator>>(istream& input, student& set_data) {	
-		int ndv=0;
-		cout << " ----------------------------------------------------------------" << endl;
-		cout << "|                                                                |" << endl;
-		cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
-		cout << "|                                                                |" << endl;
-		cout << " ----------------------------------------------------------------" << endl;
-		cout << "| 1. Studento rezultatai bus ivedami rankiniu budu;              |" << endl;
-		cout << "| 2. Importuojami is duomenu failo;                              |" << endl;
-		cout << "| 3. Generuojami is atsitiktiu skaiciu;                          |" << endl;
-		cout << "| 4. Nutraukti darba.                                            |" << endl;
-		cout << " ----------------------------------------------------------------" << endl;
+
+		cout << "\t ----------------------------------------------------------------" << endl;
+		cout << "\t|                                                                |" << endl;
+		cout << "\t|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+		cout << "\t|                                                                |" << endl;
+		cout << " \t----------------------------------------------------------------" << endl;
+		cout << "\t| 1. Studento rezultatai bus ivedami rankiniu budu;              |" << endl;
+		cout << "\t| 2. Importuojami is duomenu failo;                              |" << endl;
+		cout << "\t| 3. Generuojami is atsitiktiu skaiciu;                          |" << endl;
+		cout << "\t| 4. Nutraukti darba.                                            |" << endl;
+		cout << "\t ----------------------------------------------------------------" << endl;
 		int menuIndex = 0;
+
+		cout << "\n\tIveskite pasirinkto varianto numeri: ";
+			cin >> menuIndex;
+			while (menuIndex > 4 || menuIndex < 1) {
+				cout << "\tTokio varioanto nera iveskite tinkama varianta: ";
+				cin >> menuIndex;
+			};
+		system("CLS");
 		switch (menuIndex) {
 		case 1:
-			cout << "Ivedimas rankiniu budu";
+			cout << "\n\tIvedimas bus atliekamas rankiniu budu: " << endl;
+			cout << "\n\tIveskite studento varda:\t";
+			input >> set_data.id_name;
+			cout << "\n\tIveskite studento pavarde:\t";
+			input >> set_data.id_surname;
+
 			break;
 		case 2:
 			cout << "Impuptojama is failo";
@@ -124,7 +137,7 @@ public:
 			break;
 		}
 
-		cout << "\nIveskite studento varda:";
+		/*cout << "\nIveskite studento varda:";
 				input >> set_data.id_name;
 				cout << "\nIveskite studento pavarde: ";
 				input >> set_data.id_surname;
@@ -136,7 +149,7 @@ public:
 					vector<int>nd;
 					
 					set_data.nd.push_back(ndv);
-				};
+				};*/
 		
 			return input;
 		}
