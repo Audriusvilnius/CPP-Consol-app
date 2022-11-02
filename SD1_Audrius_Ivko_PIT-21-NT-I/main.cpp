@@ -1,5 +1,3 @@
-#include "Header.h"
-
 #include <iomanip>
 #include <cmath>
 #include <string>
@@ -10,9 +8,6 @@
 #include <iostream>
 #include <istream>
 #include <list>
-
-
-
 
 using	std::cout;
 using	std::cin;
@@ -27,6 +22,8 @@ using	std::vector;
 using	std::ostream;
 using	std::istream;
 using	std::sort;
+
+#include "Header.h"
 
 
 
@@ -93,38 +90,23 @@ public:
 
 	friend istream& operator>>(istream& input, student& set_data) {	
 		int temp = 0;
-		bool n = false;
+		char no = 'n';
+		int count = 0;
 		input >> set_data.id_name;
 		cout << "\n\tIveskite studento pavarde: ";
 		input >> set_data.id_surname;
 		cout << "\n\tIveskite namu darbu rezultata:\t";
-
-		while (n != false)
+		cout << "\n\tNutraukt -9:\t";    
+		while ( temp != -9)
 		{
+			count++;
+			cout << "\n\tNamu darbu Nr:" << count << " ivertinimas: ";
 			set_data.nd.push_back(temp);
 			input >> temp;
-			cout << "\n\tPidetas rezultas: " << temp;
-			cout << "\n\tPridet dar (y/n): ";
-		
-
 		}
+		cout << "\n\tIveskite ekzamino rezultata:\t";
+		input >> set_data.exam;
 
-
-
-		/*cout << "\nIveskite studento varda:";
-				input >> set_data.id_name;
-				cout << "\nIveskite studento pavarde: ";
-				input >> set_data.id_surname;
-				cout << "\nEgzaminno rezultatas:";
-				input >> set_data.exam;
-				cout << "\nIvedinekite namu darbu pazymius,\n baigt ivedima iveskit neigiama reiksme";
-				for(int i=0;ndv<0;i++ ){
-					cin >> ndv;
-					vector<int>nd;
-					
-					set_data.nd.push_back(ndv);
-				};*/
-		
 			return input;
 		}
 	 ~student() {};
@@ -138,14 +120,13 @@ public:
 
 int main() {
 	
-	bool n = true;
-
+	
 	vector<student> list;
 	vector<int> nd;
 	
-	student menuOption;
+	student getObject;
 	int menuIndex = 0;
-	menuIndex = menuOption.mainMenu1();
+	menuIndex = getObject.mainMenu1();
 	/*startMenu = menuOption.mainMenu2();
 	startMenu = menuOption.mainMenu3();
 	startMenu = menuOption.mainMenu4();*/
@@ -154,14 +135,18 @@ int main() {
 	case 1:
 		cout << "\n\tIvedimas bus atliekamas rankiniu budu: " << endl;
 		cout << "\n\tIveskite studento varda: ";
-		cin >> menuOption;
-
-
-	
-	
-		
-
-
+		cin >> getObject;
+		system("CLS");
+		cout << " ----------------------------------------------------------------" << endl;
+		cout << "|                                                                |" << endl;
+		cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+		cout << "|                                                                |" << endl;
+		cout << " ----------------------------------------------------------------" << endl;
+		cout << "| a. Pateikti galutini iverti vadovaujantis vidurkiu;            |" << endl;
+		cout << "| b. Pateikti galutini iverti vadovaujantis medianu;             |" << endl;
+		cout << " ----------------------------------------------------------------" << endl;
+		char subMenu1;
+		cin >> subMenu1;
 		break;
 	case 2:
 		cout << "Impuptojama is failo duomenu failo:";
