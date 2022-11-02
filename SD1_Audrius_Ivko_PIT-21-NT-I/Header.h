@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <iostream>
+#include <istream>
+
 
 using	std::cout;
 using	std::cin;

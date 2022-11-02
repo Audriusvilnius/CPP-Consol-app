@@ -1,38 +1,82 @@
 #include "Header.h"
 
+#include <iomanip>
+#include <cmath>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <stdlib.h>
+#include <algorithm>
+#include <iostream>
+#include <istream>
+#include <list>
+
+
+
+
+using	std::cout;
+using	std::cin;
+using	std::endl;
+using	std::setw;
+using	std::setprecision;
+using	std::fixed;
+using	std::left;
+using	std::right;
+using	std::string;
+using	std::vector;
+using	std::ostream;
+using	std::istream;
+using	std::sort;
+
+
 
 class student {
 private:
 	string id_name;
 	string id_surname;
-	vector<int>nd;
-	double exam;
+	vector<float>nd;
+	float exam;
 public:
-	double mean;
-	double median;
+	float mean;
+	float median;
+
 
 	//numatytasis konstruktorius vector
 	student() {
 		id_surname = "no surname";
 		id_name = "no name";
-		vector<int>nd = { 0 };
+		vector<float>nd { 0 };
 		exam = 0;
 		mean = 0;
 		median = 0;
 	}
 	// konstruktorius su  parametrais
-	student(string new_id_name, string new_id_surname, vector<double>new_nd, double new_exam) {
+	student(string new_id_name, string new_id_surname, vector<float>new_nd, float new_exam) {
 		id_name = new_id_name;
 		id_surname = new_id_surname;
-		vector<double>nd = { new_nd };
+		nd = new_nd;
 		exam = new_exam;
+	}
+	// kopijavimo konstruktorius
+	student(const student 	&original) {
+		id_name = original.id_name;
+		id_surname = original.id_surname;
+		nd = original.nd;
+		exam = original.exam;
+	
 	}
 	
 	
-	double setDataMean(vector<int>, double);
-	double setDataMedian(vector<int>, double);
-	double setDataGrade(double, double);
-	//void startMenu(vector<int>insert);
+	float setDataMean(vector<float>, float);
+	float setDataMedian(vector<float>, float);
+	float setDataGrade(float, float);
+	
+	int mainMenu1();
+	int mainMenu2();
+	int mainMenu3();
+	int mainMenu4();
+
+	//void vecFunc(vector<float>, float);
 
 	void printMean();
 	void printMedian();
@@ -48,75 +92,24 @@ public:
 	}
 
 	friend istream& operator>>(istream& input, student& set_data) {	
+		int temp = 0;
+		bool n = false;
+		input >> set_data.id_name;
+		cout << "\n\tIveskite studento pavarde: ";
+		input >> set_data.id_surname;
+		cout << "\n\tIveskite namu darbu rezultata:\t";
 
-		cout << "\t ----------------------------------------------------------------" << endl;
-		cout << "\t|                                                                |" << endl;
-		cout << "\t|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
-		cout << "\t|                                                                |" << endl;
-		cout << "\t ----------------------------------------------------------------" << endl;
-		cout << "\t| 1. Studento rezultatai bus ivedami rankiniu budu;              |" << endl;
-		cout << "\t| 2. Importuojami is duomenu failo;                              |" << endl;
-		cout << "\t| 3. Generuojami is atsitiktiu skaiciu;                          |" << endl;
-		cout << "\t| 4. Nutraukti darba.                                            |" << endl;
-		cout << "\t ----------------------------------------------------------------" << endl;
-		int menuIndex = 0;
+		while (n != false)
+		{
+			set_data.nd.push_back(temp);
+			input >> temp;
+			cout << "\n\tPidetas rezultas: " << temp;
+			cout << "\n\tPridet dar (y/n): ";
+		
 
-		cout << "\n\tIveskite pasirinktimo numeri: ";
-		cin >> menuIndex;
-			while (menuIndex > 4 || menuIndex < 1) {
-				cout << "\tTokio pasirinkimo nera iveskite tinkama numeri: ";
-				cin >> menuIndex;
-			};
-		system("CLS");
-		switch (menuIndex) {
-		case 1:
-			cout << "\n\tIvedimas bus atliekamas rankiniu budu: " << endl;
-			cout << "\n\tIveskite studento varda:\t";
-			input >> set_data.id_name;
-			cout << "\n\tIveskite studento pavarde:\t";
-			input >> set_data.id_surname;
-			cout << "\n\tIveskite egzamino rezultata:\t";
-			input >> set_data.exam;
-			cout << "\n\tIveskite namu darbu rezultata:\t";
-
-			break;
-		case 2:
-			cout << "Impuptojama is failo";
-			break;
-		case 3:
-			cout << "Atsitiktiniu pazymiu generavimas";
-		case 4:
-			cout << "Nutraukti";
-			break;
-			cout << " ----------------------------------------------------------------" << endl;
-			cout << "|                                                                |" << endl;
-			cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
-			cout << "|                                                                |" << endl;
-			cout << " ----------------------------------------------------------------" << endl;
-			cout << "| 5. Pateikti galutini iverti vadovaujantis vidurkiu;            |" << endl;
-			cout << "| 6. Pateikti galutini iverti vadovaujantis medianu;             |" << endl;
-			cout << " ----------------------------------------------------------------" << endl;
-		case 5:
-			cout << "Vadovaujantis vidurkiu";
-			break;
-		case 6:
-			cout << "Vadovaujantis medianu";
-			break;
-			cout << " ----------------------------------------------------------------"<< endl;
-			cout << "|                                                                |" << endl;
-			cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
-			cout << "|                                                                |" << endl;
-			cout << " ----------------------------------------------------------------" << endl;
-			cout << "| 7. Duomenu sarasu isvedimas i ekrana;                          |" << endl;
-			cout << "| 8. Duomenu sarasu isaugojimas faile;                           |" << endl;
-			cout << " ----------------------------------------------------------------" << endl;
-		case 7:
-			cout << "Duomenu isvedimas i ekrana";
-			break;
-		case 8:
-			cout << "Duomenu isaugojimas faile";
-			break;
 		}
+
+
 
 		/*cout << "\nIveskite studento varda:";
 				input >> set_data.id_name;
@@ -136,29 +129,114 @@ public:
 		}
 	 ~student() {};
 };
+	//void svecFunc(vector<float>, float)
+	//{
+
+	//	nd.push_back(30);
+
+	//}
 
 int main() {
-
-	vector<student>list;
 	
-	vector<double> temprez{ 6,7,8,9,5,7,6,9 };
-	student temp("Petras", "Petraitis", temprez, 6);
-	list.push_back(temp);
-	for (double i = 0; i < list.size(); i++) {
-		cin >> list[i];
-		cout << list[i];
+	bool n = true;
+
+	vector<student> list;
+	vector<int> nd;
+	
+	student menuOption;
+	int menuIndex = 0;
+	menuIndex = menuOption.mainMenu1();
+	/*startMenu = menuOption.mainMenu2();
+	startMenu = menuOption.mainMenu3();
+	startMenu = menuOption.mainMenu4();*/
+	
+	switch (menuIndex) {
+	case 1:
+		cout << "\n\tIvedimas bus atliekamas rankiniu budu: " << endl;
+		cout << "\n\tIveskite studento varda: ";
+		cin >> menuOption;
+
+
+	
+	
+		
+
+
+		break;
+	case 2:
+		cout << "Impuptojama is failo duomenu failo:";
+
+		break;
+	case 3:
+		cout << "Atsitiktiniu pazymiu generavimas";
+	case 4:
+		break;
+		cout << " ----------------------------------------------------------------" << endl;
+		cout << "|                                                                |" << endl;
+		cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+		cout << "|                                                                |" << endl;
+		cout << " ----------------------------------------------------------------" << endl;
+		cout << "| 5. Pateikti galutini iverti vadovaujantis vidurkiu;            |" << endl;
+		cout << "| 6. Pateikti galutini iverti vadovaujantis medianu;             |" << endl;
+		cout << " ----------------------------------------------------------------" << endl;
+	case 5:
+
+		cout << "Vadovaujantis vidurkiu";
+		break;
+	case 6:
+		cout << "Vadovaujantis medianu";
+		break;
+		cout << " ----------------------------------------------------------------" << endl;
+		cout << "|                                                                |" << endl;
+		cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+		cout << "|                                                                |" << endl;
+		cout << " ----------------------------------------------------------------" << endl;
+		cout << "| 7. Duomenu sarasu isvedimas i ekrana;                          |" << endl;
+		cout << "| 8. Duomenu sarasu isaugojimas faile;                           |" << endl;
+		cout << " ----------------------------------------------------------------" << endl;
+	case 7:
+		cout << "Duomenu isvedimas i ekrana";
+		break;
+	case 8:
+		cout << "Duomenu isaugojimas faile";
+		break;
 	}
 
-	
+
+
+	system("pause");
 };
 
+	int student::mainMenu1() {
+		int menuIndex = 0;
+		cout << "\t ----------------------------------------------------------------" << endl;
+		cout << "\t|                                                                |" << endl;
+		cout << "\t|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+		cout << "\t|                                                                |" << endl;
+		cout << "\t ----------------------------------------------------------------" << endl;
+		cout << "\t| 1. Studento rezultatai bus ivedami rankiniu budu;              |" << endl;
+		cout << "\t| 2. Importuojami is duomenu failo;                              |" << endl;
+		cout << "\t| 3. Generuojami is atsitiktiu skaiciu;                          |" << endl;
+		cout << "\t| 4. Nutraukti darba.                                            |" << endl;
+		cout << "\t ----------------------------------------------------------------" << endl;
+		cout << "\n\tIveskite pasirinkimo numeri: ";
+		cin >> menuIndex;
+		while (menuIndex > 4 || menuIndex < 1) {
+			cout << "\tTokio pasirinkimo nera iveskite tinkama numeri: ";
+			cin >> menuIndex;
+		};
+		system("CLS");
+		return menuIndex;
+
+		}
+
 	
 
-	double student::setDataMean(vector<int>new_nd, double new_exam) {
+	float student::setDataMean(vector<float> new_nd, float new_exam) {
 
-		vector<int>nd = new_nd;
+		nd = new_nd;
 		exam = new_exam;
-		double mean = 0;
+		float mean = 0;
 		int sum = 0;
 
 		while (!nd.size())
@@ -171,11 +249,12 @@ int main() {
 
 	}
 
-	double student::setDataMedian( vector<int>new_nd, double new_exam) {
 
-		vector<int>nd = new_nd;
+	float student::setDataMedian( vector<float> new_nd, float new_exam) {
+
+		nd = new_nd;
 		exam = new_exam;
-		double median = 0;
+		float median = 0;
 
 		int size = nd.size();
 
@@ -190,11 +269,15 @@ int main() {
 
 	}
 
-	double student::setDataGrade(double median, double exam) {
+	float student::setDataGrade(float median, float exam) {
 		
 		return ((mean * 0.4) + (exam * 0.6));
 
 	}
+
+
+	
+	
 
 	void student::printMean() {
 		cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << endl;
@@ -209,3 +292,5 @@ int main() {
 		cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << setw(17) << exam << endl;
 
 	}
+
+
