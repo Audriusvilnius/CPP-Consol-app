@@ -33,12 +33,10 @@ private:
 	string id_surname;
 	vector<float>nd;
 	float exam;
-public:
-	vector<student>list;
 	float mean;
 	float median;
 	float grade;
-
+public:
 
 
 	//numatytasis konstruktorius vector
@@ -69,18 +67,18 @@ public:
 
 	
 	
-	float setDataMean(string, string, vector<float>, float);
-	float setDataMedian(vector<float>, float);
+	void setDataMean();
+	void setDataMedian();
 	float setDataGrade(float, float);
 	
-	float mainMenu1();
+	//float mainMenu1();
 	//int mainMenu2();
 	//int mainMenu3();
 	//int mainMenu4();
 
 	//void vecFunc(vector<float>, float);
 
-	void printMean();
+	string printMean();
 	void printMedian();
 	void printAllm();
 
@@ -99,8 +97,8 @@ public:
 		for (;;){
 			count++;
 			cout << "\t\t\t" << count << ". Namu darbo ivertinimas : ";
-			set_data.nd.push_back(rez);
 			input >> rez;
+			set_data.nd.push_back(rez);
 			cout << "\t\t\t Test ivedima (y/n): ";
 			cin >> n;
 			if (n != 'y') {
@@ -109,6 +107,13 @@ public:
 			}
 		cout << "\n\t\tIveskite ekzamino rezultata:\t";
 		input >> set_data.exam;
+		set_data.setDataMean();
+		set_data.setDataMedian();
+		set_data.setDataGrade(set_data.mean, set_data.exam);
+		cout << set_data.grade << endl;
+		cout << set_data.median << endl;
+		cout << set_data.mean << endl;
+	
 			return input;
 		}
 	
@@ -122,16 +127,17 @@ public:
 	 ~student() {};
 };
 
+float mainMenu1();
 
 int main() {
 	
 	vector<student> list;
 	vector<float> nd;
 	
-	student getObject;
+	
 	int menuIndex = 0;
 	char n;
-	menuIndex = getObject.mainMenu1();
+	menuIndex = mainMenu1();
 	/*startMenu = menuOption.mainMenu2();
 	startMenu = menuOption.mainMenu3();
 	startMenu = menuOption.mainMenu4();*/
@@ -139,16 +145,18 @@ int main() {
 	switch (menuIndex) {
 	case 1:
 		for (;;) {
+			student getObject;
 			cout << "\nIvedimas bus atliekamas rankiniu budu: " << endl;
 			cin >> getObject;
-			system("CLS");
+			getObject.printMedian();
+			//system("CLS");
 			list.push_back(getObject);
 			cout << "\nDuomenys ivesti, pratest duomenu suvedima (y/n): ";
 			cin >> n;
 			if (n != 'y') {
 				break;
 			}
-			nd.clear();
+			getObject.~student();
 		}
 		system("CLS");
 		cout << " ----------------------------------------------------------------" << endl;
@@ -159,12 +167,26 @@ int main() {
 		cout << "| a. Pateikti galutini iverti vadovaujantis vidurkiu;            |" << endl;
 		cout << "| b. Pateikti galutini iverti vadovaujantis medianu;             |" << endl;
 		cout << " ----------------------------------------------------------------" << endl;
+		cout << "Pasirinkite varianta: ";
+		cin >> n;
+		for (;;) {
+			if (n == 'a' || n=='b') {
+				break;
+			}
+			cout << "tokio varianto nera iveskite tinkama: ";
+			cin >> n;
+		}
 		system("CLS");
-		for (int i = 0; i < list.size(); i++) {
-			list[i].printAllm();
-			list[i].printMedian();
-			list[i].printMean();
-		};
+		if (n == 'a') {
+			for( auto &a:list )
+		    {
+				a.printMedian();
+			};
+		}
+		/*if (n == 'b')
+			for (int i = 0; i < list.size(); i++) {
+				list[i].printMean();
+			};*/
 		
 	
 		//cin >> n;
@@ -211,7 +233,7 @@ int main() {
 	system("pause");
 };
 
-	float student::mainMenu1() {
+	float mainMenu1() {
 		int menuIndex = 0;
 		cout << " ----------------------------------------------------------------" << endl;
 		cout << "|                                                                |" << endl;
@@ -236,29 +258,21 @@ int main() {
 
 	
 
-	float student::setDataMean(string new_name, string new_idname, vector<float> new_nd, float new_exam) {
-
-		nd = new_nd;
-		exam = new_exam;
-		float mean = 0;
-		int sum = 0;
-
-		while (!nd.size())
+	void student::setDataMean() {
+		mean = 0;
+		float sum = 0;
+		
+		for( auto &a:nd)
 		{
-			sum = sum + nd.back();
+			sum = sum + a;
 		}
-		mean = sum / nd.size() * 1.0;
-
-		return mean;
-
+		mean = sum / nd.size();
 	}
 
 
-	float student::setDataMedian( vector<float> new_nd, float new_exam) {
-
-		nd = new_nd;
-		exam = new_exam;
-		float median = 0;
+	void student::setDataMedian() {
+		
+		median = 0;
 
 		int size = nd.size();
 
@@ -267,30 +281,30 @@ int main() {
 		if (size % 2 != 0) {
 			median = nd.at(size / 2);
 		}
-		median = (nd.at(size - 1 )/ 2 + nd.at(size / 2)) / 2.0;
-
-		return median;
-
+		else {
+		median = (nd.at(size /2- 1 ) + nd.at(size / 2)) / 2;
+		}
+		cout << "Test"<<median<<endl;
 	}
 
 	float student::setDataGrade(float new_mean, float nwe_exam) {
-		float grade;
+	
 		grade = ((mean * 0.4) + (exam * 0.6));
 		return grade;
-
 	}
 
 
 	
 	
 
-	void student::printMean() {
+	string student::printMean() {
 		
-		cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << endl;
-
+		//cout << id_surname << setw(17) << "" << id_name << setw(17) << mean << endl;
+		string eilute = id_surname + " " + id_name + " " + std::to_string (mean) + "\n";
+		return eilute;
 	}
 	void student::printMedian() {
-
+		setDataMedian();
 		cout << id_surname << setw(17) << "" << id_name << setw(17) <<"" << setw(17) << median << endl;
 
 	}
