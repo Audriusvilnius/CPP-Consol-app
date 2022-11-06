@@ -98,7 +98,7 @@ public:
 		cin >> option;
 		for (;;) {
 			if (option < 1 || option > 2) {
-				cout << "Tokio pasirinkimo nera, patikslinkit pasirinkima: ";
+				cout << "\nTokio pasirinkimo nera, patikslinkit pasirinkima: ";
 				cin >> option;
 			}
 			else {
@@ -106,6 +106,7 @@ public:
 			}
 		}
 		if (option == 1) {
+			cout << "Ivedimas bus atliekamas rankiniu budu: " << endl;
 			cout << "\nIveskite studento varda: ";
 			input >> set_data.id_name;
 			cout << "Iveskite studento pavarde: ";
@@ -113,7 +114,7 @@ public:
 			cout << "Iveskite namu darbu rezultatus: \n" << endl;
 			for (;;) {
 				count++;
-				cout << setw(5) << count << ". Namu darbo ivertinimas : ";
+				cout << count <<". Namu darbo ivertinimas : ";
 				input >> rez;
 				set_data.nd.push_back(rez);
 				cout << setw(12) << "" << "Test ivedima (y/n): ";
@@ -122,28 +123,30 @@ public:
 					break;
 				}
 			}
-			cout << "I\nveskite ekzamino rezultata: ";
+			cout << "\nIveskite ekzamino rezultata: ";
 			input >> set_data.exam;
 		}
 		if (option == 2) {
 			int exam = 0;
-			cout << "Iveskite studento varda: ";
+			srand(time(NULL));
+			cout << "Ivedimas bus atliekamas is atsitiktiniu skaiciu nuo 0 iki 10: " << endl;
+			cout << "\nIveskite studento varda: ";
 			input >> set_data.id_name;
 			cout << "Iveskite studento pavarde: ";
 			input >> set_data.id_surname;
-			cout << "Namu darbu ir egzamino rezultatu generavimas. ";
+			cout << "\nNamu darbu ir egzamino rezultatu generavimas. ";
 			cout << "\nIveskite namu darbu kieki: ";
 			cin >> ndqty;
 			for (int i = 0; i < ndqty; i++) {
 				count++;
 				cout << count <<""<<setw(3) << ". Namu darbo ivertinimas : ";
-				rez = rand() % 11;
+				rez = rand() % 10+1;
 				cout << rez << endl;
 				set_data.nd.push_back(rez);
 			}
-			exam = rand() % 11;
-			set_data.exam;
-			cout << "Ekzamino rezultats: ";
+			exam = rand() % 10+1;
+			set_data.exam = exam;
+			cout << "\nEkzamino rezultats: ";
 			cout << exam << endl;
 		
 		}
@@ -164,13 +167,17 @@ public:
 		output << "-------------------------------------------------------------------------------------------------" << endl;
 		output << "|\tVardas" << setw(20) << "|\tPavarde" << setw(20) << "|\tVidurkis" << setw(20) << "|\tMedianas\t|" << endl;
 		output << "-------------------------------------------------------------------------------------------------" << endl;
-		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << set_data.mean << setw(20) << set_data.median << endl;
+		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << set_data.median << endl;
+		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << "" << setw(20) << set_data.mean << endl;
+		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << set_data.gradeMean << setw(20) << set_data.gradeMedian << endl;
+		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << "" << setw(20) << set_data.gradeMedian << endl;
+		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << set_data.gradeMean << endl;
 		return output;
 	}
 	~student() {};
 };
 
-int mainMenu1();
+//int mainMenu1();
 
 int main() {
 
@@ -179,7 +186,28 @@ int main() {
 
 	int menuIndex = 0;
 	char n;
-	menuIndex = mainMenu1();
+
+
+
+	cout << " ----------------------------------------------------------------" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << " ----------------------------------------------------------------" << endl;
+	cout << "| 1. Studento rezultatai bus ivedami rankiniu budu,              |" << endl;
+	cout << "|    arba generuojami is atsitiktiniu skaiciu                    |" << endl;
+	cout << "| 2. Impuptojama is duomenu failo:                               |" << endl;
+	cout << "| 3. Nutraukti darba.                                            |" << endl;
+	cout << " ----------------------------------------------------------------" << endl;
+	cout << "Iveskite pasirinkimo numeri: ";
+	cin >> menuIndex;
+	while (menuIndex > 4 || menuIndex < 1) {
+		cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
+		cin >> menuIndex;
+	};
+	system("CLS");
+
+	//menuIndex = mainMenu1();
 	//menuIndex = mainMenu2();
 	/*startMenu = menuOption.mainMenu2();
 	startMenu = menuOption.mainMenu3();
@@ -188,9 +216,9 @@ int main() {
 	switch (menuIndex) {
 	case 1:
 		for (;;) {
-			student getObject;
-			cout << "Ivedimas bus atliekamas rankiniu budu: " << endl;
+			student getObject, print;
 			cin >> getObject;
+			cout << getObject;
 			////		TEST INPUT DATA
 			//getObject.printMedian();
 			//getObject.printMean();
@@ -198,11 +226,12 @@ int main() {
 			//getObject.printAllMedian();
 			//system("CLS");
 			list.push_back(getObject);
-			cout << "Duomenys ivesti ir isaugoti.\nPratest duomenu suvedima (y/n): ";
+			cout << "\nDuomenys ivesti ir isaugoti.\nPratest duomenu suvedima (y/n): ";
 			cin >> n;
 			if (n != 'y') {
 				break;
 			}
+			
 			getObject.~student();
 		}
 		system("CLS");
@@ -250,6 +279,7 @@ int main() {
 				a.printAllMedian();
 			};
 		}
+		
 		break;
 	case 2:
 		cout << "Impuptojama is failo duomenu failo:";
@@ -281,31 +311,32 @@ int main() {
 		cout << "Duomenu isaugojimas faile";
 		break;
 	}
+	
 	system("pause");
 };
 
-int mainMenu1() {
-	int menuIndex = 0;
-	cout << " ----------------------------------------------------------------" << endl;
-	cout << "|                                                                |" << endl;
-	cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
-	cout << "|                                                                |" << endl;
-	cout << " ----------------------------------------------------------------" << endl;
-	cout << "| 1. Studento rezultatai bus ivedami rankiniu budu,              |" << endl;
-	cout << "|    arba generuojami is atsitiktiniu skaiciu                    |" << endl;
-	cout << "| 2. Impuptojama is duomenu failo:                       |" << endl;
-	cout << "| 3. Nutraukti darba.                                            |" << endl;
-	cout << " ----------------------------------------------------------------" << endl;
-	cout << "Iveskite pasirinkimo numeri: ";
-	cin >> menuIndex;
-	while (menuIndex > 4 || menuIndex < 1) {
-		cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
-		cin >> menuIndex;
-	};
-	system("CLS");
-	return menuIndex;
-
-}
+//int mainMenu1() {
+//	int menuIndex = 0;
+//	cout << " ----------------------------------------------------------------" << endl;
+//	cout << "|                                                                |" << endl;
+//	cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+//	cout << "|                                                                |" << endl;
+//	cout << " ----------------------------------------------------------------" << endl;
+//	cout << "| 1. Studento rezultatai bus ivedami rankiniu budu,              |" << endl;
+//	cout << "|    arba generuojami is atsitiktiniu skaiciu                    |" << endl;
+//	cout << "| 2. Impuptojama is duomenu failo:                               |" << endl;
+//	cout << "| 3. Nutraukti darba.                                            |" << endl;
+//	cout << " ----------------------------------------------------------------" << endl;
+//	cout << "Iveskite pasirinkimo numeri: ";
+//	cin >> menuIndex;
+//	while (menuIndex > 4 || menuIndex < 1) {
+//		cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
+//		cin >> menuIndex;
+//	};
+//	system("CLS");
+//	return menuIndex;
+//
+//}
 
 void student::setDataMean() {
 	mean = 0;
