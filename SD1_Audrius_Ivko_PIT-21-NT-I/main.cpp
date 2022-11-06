@@ -11,6 +11,8 @@
 #include <string>
 #include <random>
 #include <chrono>
+#include <time.h>
+
 
 using	std::cout;
 using	std::cin;
@@ -26,7 +28,7 @@ using	std::ostream;
 using	std::istream;
 using	std::sort;
 using	std::getline;
-
+using	std::ifstream;
 
 #include "Header.h"
 
@@ -97,7 +99,7 @@ public:
 		cout << "\nIveskite pasirinkimo numeri: ";
 		cin >> option;
 		for (;;) {
-			if (option < 1 || option > 2) {
+			if (option < 1 || option > 3) {
 				cout << "\nTokio pasirinkimo nera, patikslinkit pasirinkima: ";
 				cin >> option;
 			}
@@ -114,10 +116,10 @@ public:
 			cout << "Iveskite namu darbu rezultatus: \n" << endl;
 			for (;;) {
 				count++;
-				cout << count <<". Namu darbo ivertinimas : ";
+				cout << count << ". Namu darbo ivertinimas : ";
 				input >> rez;
 				set_data.nd.push_back(rez);
-				cout << setw(12) << "" << "Test ivedima (y/n): ";
+				cout << "\tTest ivedima (y/n): ";
 				cin >> n;
 				if (n != 'y') {
 					break;
@@ -139,41 +141,71 @@ public:
 			cin >> ndqty;
 			for (int i = 0; i < ndqty; i++) {
 				count++;
-				cout << count <<""<<setw(3) << ". Namu darbo ivertinimas : ";
-				rez = rand() % 10+1;
-				cout << rez << endl;
+				cout <<"\n"<< count << "" << setw(3) << ". Namu darbo ivertinimas : ";
+				rez = rand() % 11;
+				cout << rez;
 				set_data.nd.push_back(rez);
 			}
-			exam = rand() % 10+1;
+			exam = rand() % 11;
 			set_data.exam = exam;
 			cout << "\nEkzamino rezultats: ";
 			cout << exam << endl;
-		
 		}
-			set_data.setDataMean();
-			set_data.setDataMedian();
-			set_data.setDataGradeMean(set_data.mean, set_data.exam);
-			set_data.setDataGradeMedian(set_data.median, set_data.exam);
-			//	/* Function test
-			//	cout << set_data.gradeMean << "gradeMean"<<endl;
-			//	cout << set_data.gradeMedian << "gradeMedian"<<endl;
-			//	cout << set_data.median << endl;
-			//	cout << set_data.mean << endl;*/
-		
+		set_data.setDataMean();
+		set_data.setDataMedian();
+		set_data.setDataGradeMean(set_data.mean, set_data.exam);
+		set_data.setDataGradeMedian(set_data.median, set_data.exam);
+		//	/* Function test
+		//	cout << set_data.gradeMean << "gradeMean"<<endl;
+		//	cout << set_data.gradeMedian << "gradeMedian"<<endl;
+		//	cout << set_data.median << endl;
+		//	cout << set_data.mean << endl;*/
+
 		return input;
 	}
 
 	friend ostream& operator<<(ostream& output, const student& set_data) {
-		output << "-------------------------------------------------------------------------------------------------" << endl;
-		output << "|\tVardas" << setw(20) << "|\tPavarde" << setw(20) << "|\tVidurkis" << setw(20) << "|\tMedianas\t|" << endl;
-		output << "-------------------------------------------------------------------------------------------------" << endl;
-		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << set_data.median << endl;
-		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << "" << setw(20) << set_data.mean << endl;
-		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << set_data.gradeMean << setw(20) << set_data.gradeMedian << endl;
-		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << "" << setw(20) << set_data.gradeMedian << endl;
-		output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << set_data.gradeMean << endl;
+		int otion = 0;
+		output << " ----------------------------------------------------------------" << endl;
+		output << "|                                                                |" << endl;
+		output << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
+		output << "|                                                                |" << endl;
+		output << " ----------------------------------------------------------------" << endl;
+		output << "| 1. Pateikti namu darbu iverciu vidurki;                        |" << endl;
+		output << "| 2. Pateikti namu darbu iverciu mediana;                        |" << endl;
+		output << "| 3. Pateikti galutini iverti vadovaujantis vidurkiu;            |" << endl;
+		output << "| 4. Pateikti galutini iverti vadovaujantis medianu;             |" << endl;
+		output << "| 5. Pateikti galutini iverti vadovaujantis medianu;             |" << endl;
+		output << " ----------------------------------------------------------------" << endl;
+		output << "Pasirinkite varianta: ";
+		cin >> otion;
+		while (otion > 5 || otion < 1) {
+			cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
+			cin >> otion;
+		};
+		system("CLS");
+		output << "-----------------------------------------------------------------" << endl;
+		output << "|" << setw(10)<<"Vardas" << setw(6) << "|" << setw(10)<< "Pavarde" << setw(6) << "|" << setw(10)<< "Vidurkis" << setw(6) << "|" << setw(10)<<"Medianas"<< setw(6)<<"|" << endl;
+		output << "-----------------------------------------------------------------" << endl;
+		if (otion == 1) {
+			output << set_data.id_name << setw(10) << set_data.id_surname << setw(10) << set_data.median << endl;
+		}
+		if (otion == 2) {
+			output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << "" << setw(20) << set_data.mean << endl;
+		}
+		if (otion == 3) {
+			output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << set_data.gradeMean << setw(20) << set_data.gradeMedian << endl;
+		}
+		if (otion == 4) {
+			output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << "" << setw(20) << set_data.gradeMedian << endl;
+		}
+		if (otion == 5) {
+			output << set_data.id_name << setw(20) << set_data.id_surname << setw(20) << set_data.gradeMean << endl;
+		}
+
 		return output;
 	}
+
 	~student() {};
 };
 
@@ -184,11 +216,23 @@ int main() {
 	vector<student> list;
 	vector<float> nd;
 
+	//int row;
+	//vector<std::string> lines;
+	//ifstream infile("indata.txt");
+
+	//std::string line;
+	//while (std::getline(infile, line)) {
+	//	lines.push_back(line);
+	//	std::cout << lines.back() << std::endl;
+	//	
+	//}
+	//sort(line.begin(), line.end());
+	//row =  lines.size();
+	//cout << "dydis" << row;
+	//infile.close();
+
 	int menuIndex = 0;
 	char n;
-
-
-
 	cout << " ----------------------------------------------------------------" << endl;
 	cout << "|                                                                |" << endl;
 	cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
@@ -201,7 +245,7 @@ int main() {
 	cout << " ----------------------------------------------------------------" << endl;
 	cout << "Iveskite pasirinkimo numeri: ";
 	cin >> menuIndex;
-	while (menuIndex > 4 || menuIndex < 1) {
+	while (menuIndex > 3 || menuIndex < 1) {
 		cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
 		cin >> menuIndex;
 	};
@@ -216,26 +260,30 @@ int main() {
 	switch (menuIndex) {
 	case 1:
 		for (;;) {
-			student getObject, print;
+			student getObject;
 			cin >> getObject;
-			cout << getObject;
+			cout << "\nDuomenys ivesti ir isaugoti.\nPratest duomenu suvedima (y/n): ";
+			cin >> n;
+			if (n != 'y') {
+				list.push_back(getObject);
+				cout << getObject;
+
+			}
+			else {
+				list.push_back(getObject);
+				cin >> getObject;
+			}
+			list.push_back(getObject);
 			////		TEST INPUT DATA
 			//getObject.printMedian();
 			//getObject.printMean();
 			//getObject.printAllMean();
 			//getObject.printAllMedian();
 			//system("CLS");
-			list.push_back(getObject);
-			cout << "\nDuomenys ivesti ir isaugoti.\nPratest duomenu suvedima (y/n): ";
-			cin >> n;
-			if (n != 'y') {
-				break;
-			}
-			
 			getObject.~student();
 		}
 		system("CLS");
-		cout << " ----------------------------------------------------------------" << endl;
+		/*cout << " ----------------------------------------------------------------" << endl;
 		cout << "|                                                                |" << endl;
 		cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
 		cout << "|                                                                |" << endl;
@@ -253,65 +301,40 @@ int main() {
 			}
 			cout << "Tokio pasirinkimo nera.\n Iveskite isnaujo: ";
 			cin >> n;
-		}
+		}*/
 		//system("CLS");
-		if (n == 'a') {
-			for (auto& a : list)
-			{
-				a.printMedian();
-			};
-		}
-		if (n == 'a') {
-			for (auto& a : list)
-			{
-				a.printMean();
-			};
-		}
-		if (n == 'a') {
-			for (auto& a : list)
-			{
-				a.printAllMean();
-			};
-		}
-		if (n == 'a') {
-			for (auto& a : list)
-			{
-				a.printAllMedian();
-			};
-		}
-		
-		break;
+		//if (n == 'a') {
+		//	for (auto& a : list)
+		//	{
+		//		a.printMedian();
+		//	};
+		//}
+		//if (n == 'a') {
+		//	for (auto& a : list)
+		//	{
+		//		a.printMean();
+		//	};
+		//}
+		//if (n == 'a') {
+		//	for (auto& a : list)
+		//	{
+		//		a.printAllMean();
+		//	};
+		//}
+		//if (n == 'a') {
+		//	for (auto& a : list)
+		//	{
+		//		a.printAllMedian();
+		//	};
+		//}
+		//
+
 	case 2:
 		cout << "Impuptojama is failo duomenu failo:";
 		break;
-	case 3:
-		cout << "Atsitiktiniu pazymiu generavimas";
-		break;
-	case 4:
-		cout << "Vadovaujantis medianu";
-		break;
-	case 5:
-		cout << "Vadovaujantis medianu";
-		break;
-	case 6:
+	case 3:return 0;
 
-		break;
-		cout << " ----------------------------------------------------------------" << endl;
-		cout << "|                                                                |" << endl;
-		cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
-		cout << "|                                                                |" << endl;
-		cout << " ----------------------------------------------------------------" << endl;
-		cout << "| 7. Duomenu sarasu isvedimas i ekrana;                          |" << endl;
-		cout << "| 8. Duomenu sarasu isaugojimas faile;                           |" << endl;
-		cout << " ----------------------------------------------------------------" << endl;
-	case 7:
-		cout << "Duomenu isvedimas i ekrana";
-		break;
-	case 8:
-		cout << "Duomenu isaugojimas faile";
-		break;
 	}
-	
 	system("pause");
 };
 
