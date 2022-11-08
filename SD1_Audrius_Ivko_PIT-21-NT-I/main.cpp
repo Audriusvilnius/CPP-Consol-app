@@ -12,6 +12,7 @@
 #include <random>
 #include <chrono>
 #include <time.h>
+#include <sstream>
 
 
 using	std::cout;
@@ -29,6 +30,7 @@ using	std::istream;
 using	std::sort;
 using	std::getline;
 using	std::ifstream;
+using	std::istringstream;
 
 #include "Header.h"
 
@@ -92,11 +94,11 @@ public:
 		int ndqty = 0;
 		char n;
 		int count = 0;
-		cout << " ----------------------------------------------------------------" << endl;
-		cout << "| 1. Duomenis bus ivedam rankiniu budu;                          |" << endl;
-		cout << "| 2. Duomeis bus generuojami is atsitiktiu skaiciu.              |" << endl;
-		cout << "| 3. Duomeis bus nauskaitomi is failo.                           |" << endl;
-		cout << " ----------------------------------------------------------------" << endl;
+		cout << "--------------------------------------------------------------------------" << endl;
+		cout << "| 1. Duomenis bus ivedam rankiniu budu;                                   |" << endl;
+		cout << "| 2. Duomeis bus generuojami is atsitiktiu skaiciu.                       |" << endl;
+		cout << "| 3. Duomeis bus nauskaitomi is failo.                                    |" << endl;
+		cout << "--------------------------------------------------------------------------" << endl;
 		cout << "\nIveskite pasirinkimo numeri: ";
 		cin >> option;
 		for (;;) {
@@ -155,6 +157,7 @@ public:
 		if (option == 3) {
 
 		}
+		
 
 		set_data.setDataMean();
 		set_data.setDataMedian();
@@ -171,17 +174,17 @@ public:
 
 	friend ostream& operator<<(ostream& output, const student& set_data) {
 		int option = 0;
-		output << " ----------------------------------------------------------------" << endl;
-		output << "|                                                                |" << endl;
-		output << "|   Pasirinkimu sarasas duomenu ivesties / isvesties             |" << endl;
-		output << "|                                                                |" << endl;
-		output << " ----------------------------------------------------------------" << endl;
-		output << "| 1. Pateikti namu darbu iverciu vidurki;                        |" << endl;
-		output << "| 2. Pateikti namu darbu iverciu mediana;                        |" << endl;
-		output << "| 3. Pateikti galutini iverti vadovaujantis vidurkiu;            |" << endl;
-		output << "| 4. Pateikti galutini iverti vadovaujantis medianu;             |" << endl;
-		output << "| 5. Pateikti galutini iverti vadovaujantis vidurkiu ir medianu; |" << endl;
-		output << " ----------------------------------------------------------------" << endl;
+		output << "--------------------------------------------------------------------------" << endl;
+		output << "|                                                                         |" << endl;
+		output << "|   Pasirinkimu sarasas duomenu ivesties / isvesties                      |" << endl;
+		output << "|                                                                         |" << endl;
+		output << "--------------------------------------------------------------------------" << endl;
+		output << "| 1. Pateikti namu darbu iverciu vidurki;                                 |" << endl;
+		output << "| 2. Pateikti namu darbu iverciu mediana;                                 |" << endl;
+		output << "| 3. Pateikti galutini iverti vadovaujantis vidurkiu;                     |" << endl;
+		output << "| 4. Pateikti galutini iverti vadovaujantis medianu;                      |" << endl;
+		output << "| 5. Pateikti galutini iverti vadovaujantis vidurkiu ir medianu;          |" << endl;
+		output << "--------------------------------------------------------------------------" << endl;
 		output << "Pasirinkite varianta: ";
 		cin >> option;
 		while (option > 5 || option < 1) {
@@ -221,19 +224,17 @@ int main() {
 
 	int menuIndex = 0;
 	char n;
-	cout << " ----------------------------------------------------------------" << endl;
-	cout << "|                                                                |" << endl;
-	cout << "|   Pasirinkimu sarasas duomenu ivesties / isvesties variantams  |" << endl;
-	cout << "|                                                                |" << endl;
-	cout << " ----------------------------------------------------------------" << endl;
-	cout << "| 1. Studento rezultatai bus ivedami rankiniu budu,              |" << endl;
-	cout << "|    arba generuojami is atsitiktiniu skaiciu                    |" << endl;
-	cout << "| 2. Impuptojama is duomenu failo:                               |" << endl;
-	cout << "| 0. Nutraukti darba.                                            |" << endl;
-	cout << " ----------------------------------------------------------------" << endl;
+	cout << "--------------------------------------------------------------------------" << endl;
+	cout << "|                                                                         |" << endl;
+	cout << "|                  Studentu pazymiu apdorojimo programa                   |" << endl;
+	cout << "|                                                                         |" << endl;
+	cout << "--------------------------------------------------------------------------" << endl;
+	cout << "| 1. Darbas su studentu duomenimis;                                       |" << endl;
+	cout << "| 0. Nutraukti darba.    2.                                                 |" << endl;
+	cout << "--------------------------------------------------------------------------" << endl;
 	cout << "Iveskite pasirinkimo numeri: ";
 	cin >> menuIndex;
-	while (menuIndex > 2 || menuIndex < 0) {
+	while (menuIndex > 3 || menuIndex < 0) {
 		cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
 		cin >> menuIndex;
 	};
@@ -262,11 +263,28 @@ int main() {
 		}
 		system("CLS");
 	case 2:
-		cout << "Impuptojama is failo duomenu failo:";
+		ifstream ins("indata.txt");
+		string s;
+		getline(ins, s);
+		while (ins) {
+			getline(ins, s);
+			if (!ins) break;
+			cout << "failo turinys: " << s << endl;
+			istringstream sts(s);
+			while (sts) {
+				string temp;
+				getline(sts, temp, '\t');
+				if (!sts)break;
+				cout << "nuskaityta: " << temp << endl;
+
+			}
+		}
+
 		break;
-	case 0:return 0;
+	//case 0:return 0;
 
 	}
+	
 	system("pause");
 };
 
