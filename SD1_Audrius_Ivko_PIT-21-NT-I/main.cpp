@@ -32,7 +32,7 @@ using	std::getline;
 using	std::ifstream;
 using	std::istringstream;
 
-#include "Header.h"
+//#include "Header.h"
 
 
 
@@ -223,18 +223,19 @@ int main() {
 	vector<float> nd;
 
 	int menuIndex = 0;
-	char n;
+	char n ='n';
 	cout << "--------------------------------------------------------------------------" << endl;
 	cout << "|                                                                         |" << endl;
 	cout << "|                  Studentu pazymiu apdorojimo programa                   |" << endl;
 	cout << "|                                                                         |" << endl;
 	cout << "--------------------------------------------------------------------------" << endl;
 	cout << "| 1. Darbas su studentu duomenimis;                                       |" << endl;
-	cout << "| 0. Nutraukti darba.    2.                                                 |" << endl;
+	cout << "| 2. Duomenu nuskaitymas is failo;                                        |" << endl;
+	cout << "| 0. Nutraukti darba.                                                     |" << endl;
 	cout << "--------------------------------------------------------------------------" << endl;
 	cout << "Iveskite pasirinkimo numeri: ";
 	cin >> menuIndex;
-	while (menuIndex > 3 || menuIndex < 0) {
+	while (menuIndex > 2 || menuIndex < 0) {
 		cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
 		cin >> menuIndex;
 	};
@@ -269,19 +270,42 @@ int main() {
 		while (ins) {
 			getline(ins, s);
 			if (!ins) break;
-			cout << "failo turinys: " << s << endl;
+			//cout << "failo turinys: " << s << endl;
 			istringstream sts(s);
-			while (sts) {
+			//student p;
+			//while (sts) {
 				string temp;
+				//if (!sts)break;
 				getline(sts, temp, '\t');
-				if (!sts)break;
-				cout << "nuskaityta: " << temp << endl;
+				//cout << "nuskaityta: " << temp << endl;
+				string id_name = temp;
+				getline(sts,temp, '\t');
+				string id_surname = temp;
+				getline(sts, temp, '\t');
+				float nd1 = stof(temp);
+				nd.push_back(nd1);
+				getline(sts, temp, '\t');
+				float nd2 = stof(temp);
+				nd.push_back(nd2);
+				getline(sts, temp, '\t');
+				float nd3 = stof(temp);
+				nd.push_back(nd3);
+				getline(sts, temp, '\t');
+				float exam = stof(temp);
 
-			}
+				student p(id_name, id_surname, nd, exam, 0,0);
+					list.push_back(p);
+
+			//}
+					//cout << getObject;
+					p.~student();
 		}
+		for (auto& a : list)
+		{
+			a.printMedian();
+		};
 
 		break;
-	//case 0:return 0;
 
 	}
 	
@@ -334,10 +358,11 @@ void student::printMean() {
 
 void student::printMedian() {
 	setDataMedian();
-	cout << left << id_surname << setw(15) << left << id_name << setw(15) << "" << setw(18) << median << endl;
+	cout << left << id_surname <<"" <<setw(15) <<"" << left <<""<< id_name << setw(15) << "" << setw(18) << median << endl;
 }
 void student::printAllMean() {
-	cout << left << id_surname << left << setw(15) << id_name << setw(15) << gradeMean << setw(15) << endl;
+
+	cout << left << id_surname << setw(15) << id_name << setw(15) << gradeMean << setw(15) << endl;
 }
 void student::printAllMedian() {
 	cout << left << id_surname << left << setw(15) << left << id_name << setw(15) << "" << setw(15) << gradeMedian << endl;
