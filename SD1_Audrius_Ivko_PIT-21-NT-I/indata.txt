@@ -1,8 +1,8 @@
 pavarde vardas	nd1	nd2	nd3	exam
-Vardas1	Pavarde1	5	3	5	7
-denis2	Vader	4	3	5	7
-rdenis3	Vader	7	3	5	7
-Pavanis4	Vder	8	3	5	7
-Pava5	Vaer	10	3	5	7
-vardenis7	Vader	4	3	5	7
-Pavarnis8	Vader	7	3	5	7
+Vardas1	Pavarde1	5	3	5	7	4	7
+denis2	Vader	4	3	5	7	6	7
+rdenis3	Vader	7	3	5	7	9	4	
+Pavanis4	Vder	8	3	5	7	6	9
+Pava5	Vaer	10	3	5	7	7	9	
+vardenis7	Vader	4	3	5	7	10	6
+Pavarnis8	Vader	7	3	5	7	6	8
