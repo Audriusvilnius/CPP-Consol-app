@@ -34,8 +34,6 @@ using	std::istringstream;
 
 //#include "Header.h"
 
-
-
 class student {
 private:
 	string id_name;
@@ -54,7 +52,6 @@ public:
 		return id_name;
 	}
 
-	//numatytasis konstruktorius vector
 	student() {
 		id_surname = "no surname";
 		id_name = "no name";
@@ -65,17 +62,7 @@ public:
 		gradeMean = 0;
 		gradeMedian = 0;
 	}
-	// konstruktorius su  parametrais
-	/*student(string new_id_name, string new_id_surname, vector<float>new_nd, float new_exam, float new_gradeMean, float gradeMedian) {
-		id_name = new_id_name;
-		id_surname = new_id_surname;
-		nd = new_nd;
-		exam = new_exam;
-		setDataMean();
-		setDataMedian();
-		setDataGradeMean();
-		setDataGradeMedian();
-	}*/
+
 	student(string new_id_name, string new_id_surname, vector<float>new_nd, float new_exam) {
 		id_name = new_id_name;
 		id_surname = new_id_surname;
@@ -85,7 +72,6 @@ public:
 		setDataMedian();
 		setDataGradeMean();
 		setDataGradeMedian();
-		
 	}
 
 	// kopijavimo konstruktorius
@@ -107,10 +93,7 @@ public:
 	void printMedian();
 	void printAllMean();
 	void printAllMedian();
-	//void printSet();
 
-
-	//cin / cout - perdengimas
 	friend istream& operator>>(istream& input, student& set_data) {
 		int rez = 0;
 		int option;
@@ -177,11 +160,6 @@ public:
 			cout << "\nEkzamino rezultats: ";
 			cout << exam << endl;
 		}
-		if (option == 3) {
-
-		}
-		
-
 		set_data.setDataMean();
 		set_data.setDataMedian();
 		set_data.setDataGradeMean();
@@ -191,7 +169,6 @@ public:
 		//	cout << set_data.gradeMedian << "gradeMedian"<<endl;
 		//	cout << set_data.median << endl;
 		//	cout << set_data.mean << endl;*/
-
 		return input;
 	}
 
@@ -233,18 +210,15 @@ public:
 		if (option == 5) {
 			output << setw(15) << left << set_data.id_name << setw(15) << set_data.id_surname << setw(15) << set_data.gradeMean << setw(15) << set_data.gradeMedian << endl;
 		}
-
 		return output;
 	}
 	~student() {};
 };
 
-
 int main() {
 	char indata = 'z';
 	vector<student> list;
 	vector<float> nd;
-
 	int menuIndex = 0;
 	char n ='n';
 	cout << "--------------------------------------------------------------------------" << endl;
@@ -276,8 +250,7 @@ int main() {
 					cout << getObject;
 				}
 			};
-			
-			////		TEST INPUT DATA
+			//		TEST INPUT DATA
 			//getObject.printMedian();
 			//getObject.printMean();
 			//getObject.printAllMean();
@@ -287,7 +260,6 @@ int main() {
 		}
 		system("CLS");
 	case 2:
-		/*student p;*/
 		ifstream ins("indata.txt");
 		string s,tempnama, tempsurname;
 		
@@ -299,9 +271,7 @@ int main() {
 		while (ins) {
 			getline(ins, s);
 			if (!ins) break;
-			//cout << "failo turinys: " << s << endl;
 			istringstream sts(s);
-			//while (sts) {
 				string temp;
 				sts >> tempnama >> tempsurname;
 				
@@ -315,27 +285,18 @@ int main() {
 				student stutemp(tempnama, tempsurname, temppaz, temex);
 				temppaz.clear();
 
-
 				list.push_back(stutemp);
 				stutemp.~student();
-
-
-		
 		}
 	
 		for (auto& a : list)
 		{
 			a.printAllMedian();
 		};
-
 		break;
-
 	}
-	
 	system("pause");
 };
-
-
 
 void student::setDataMean() {
 	mean = 0;
@@ -362,7 +323,6 @@ void student::setDataMedian() {
 	else {
 		median = (nd.at(size / 2 - 1) + nd.at(size / 2)) / 2;
 	}
-
 }
 
 float student::setDataGradeMean() {
@@ -393,5 +353,3 @@ void student::printAllMean() {
 void student::printAllMedian() {
 	cout << left << id_surname << setw(15) << id_name << setw(15) << "" << setw(15) << gradeMedian << endl;
 }
-
-
