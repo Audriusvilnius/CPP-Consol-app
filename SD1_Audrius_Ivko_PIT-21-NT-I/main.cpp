@@ -118,13 +118,13 @@ public:
 			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << "" << setw(15) << set_data.id_surname << "" << setw(35) << "" << set_data.median << endl;
 		}
 		if (option == 3) {
-			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << "" << setw(15) << set_data.id_surname << "" << setw(35) << "" << set_data.gradeMean << endl;
+			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << "" << setw(15) << set_data.id_surname << setw(15) << "" << set_data.gradeMean << endl;
 		}
 		if (option == 4) {
-			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << setw(15) << set_data.id_surname << setw(15) << "" << setw(15) << set_data.gradeMedian << endl;
+			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << "" << setw(15) << set_data.id_surname << "" << setw(35) << "" << set_data.gradeMedian << endl;
 		}
 		if (option == 5) {
-			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << setw(15) << set_data.id_surname << setw(15) << set_data.gradeMean << setw(15) << set_data.gradeMedian << endl;
+			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << setw(15) << set_data.id_surname << setw(15) << "" << set_data.gradeMean << setw(15) << "" << set_data.gradeMedian << endl;
 		}
 		return output;
 	}
@@ -142,8 +142,8 @@ int main() {
 	string temp;
 	string id_name1;
 	string id_surname1;
-	vector<student> list;
 	student getObject;
+	vector<student> list;
 	vector<float> nd;
 	srand(time(NULL));
 	for (;;) {
@@ -214,12 +214,14 @@ int main() {
 			cout << "--------------------------------------------------------------------------" << endl;
 
 			student getObject(id_name1, id_surname1, nd, exam1);
+			nd.clear();
 			list.push_back(getObject);
 			cout << getObject;
 			getObject.~student();
 			system("pause");
 		}
 		if (menuIndex == 2) {
+			count = 0;
 			cout << "Ivedimas bus atliekamas is atsitiktiniu skaiciu nuo 0 iki 10: " << endl;
 			cout << "\nIveskite namu darbu kieki: ";
 			cin >> ndqty;
@@ -233,6 +235,7 @@ int main() {
 				nd.push_back(rez);
 			}
 			exam1 = rand() % 11;
+
 			cout << "\n\nEkzamino rezultats: ";
 			cout << exam1 << endl << endl;
 
@@ -242,19 +245,16 @@ int main() {
 			cout << "--------------------------------------------------------------------------" << endl;
 
 			student getObject(id_name1, id_surname1, nd, exam1);
+			nd.clear();
 			list.push_back(getObject);
 			cout << getObject;
 			getObject.~student();
 			system("pause");
 		}
-
-
-
 		if (menuIndex == 3) {
 			system("CLS");
-			/*	cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde" << setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
-			cout << "--------------------------------------------------------------------------" << endl;*/
-			option = 6;
+				cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde" << setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
+			cout << "--------------------------------------------------------------------------" << endl;
 
 			ifstream ins("indata.txt");
 
@@ -277,15 +277,17 @@ int main() {
 				list.push_back(getObject);
 				cout << getObject;
 				getObject.~student();
+				
+			}	
+
+
+
 			}
-			//cout << "--------------------------------------------------------------------------" << endl;
-			//		for (int i = 0; i < list.size(); i++) {
-			//			cout << list[i];
-			//			return 0;
-			//		}
-		}
+
+		
+		system("pause");	
 	}
-	//cin.get(); 
+
 };
 
 void student::setDataMean() {
