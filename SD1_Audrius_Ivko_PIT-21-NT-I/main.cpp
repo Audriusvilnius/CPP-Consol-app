@@ -34,6 +34,8 @@ using	std::istringstream;
 
 //#include "Header.h"
 
+int option = 0;
+
 class student {
 private:
 	string id_name;
@@ -95,71 +97,7 @@ public:
 	void printAllMedian();
 
 	friend istream& operator>>(istream& input, student& set_data) {
-		int rez = 0;
-		int option;
-		int ndqty = 0;
-		char n;
-		int count = 0;
-		cout << "--------------------------------------------------------------------------" << endl;
-		cout << "| 1. Duomenis bus ivedam rankiniu budu;                                   |" << endl;
-		cout << "| 2. Duomeis bus generuojami is atsitiktiu skaiciu.                       |" << endl;
-		cout << "| 3. Duomeis bus nauskaitomi is failo.                                    |" << endl;
-		cout << "--------------------------------------------------------------------------" << endl;
-		cout << "\nIveskite pasirinkimo numeri: ";
-		cin >> option;
-		for (;;) {
-			if (option < 1 || option > 3) {
-				cout << "\nTokio pasirinkimo nera, patikslinkit pasirinkima: ";
-				cin >> option;
-			}
-			else {
-				break;
-			}
-		}
-		if (option == 1) {
-			cout << "Ivedimas bus atliekamas rankiniu budu: " << endl;
-			cout << "\nIveskite studento varda: ";
-			input >> set_data.id_name;
-			cout << "Iveskite studento pavarde: ";
-			input >> set_data.id_surname;
-			cout << "Iveskite namu darbu rezultatus: \n" << endl;
-			for (;;) {
-				count++;
-				cout << count << ". Namu darbo ivertinimas : ";
-				input >> rez;
-				set_data.nd.push_back(rez);
-				cout << "\tTest ivedima (y/n): ";
-				cin >> n;
-				if (n != 'y') {
-					break;
-				}
-			}
-			cout << "\nIveskite ekzamino rezultata: ";
-			input >> set_data.exam;
-		}
-		if (option == 2) {
-			int exam = 0;
-			srand(time(NULL));
-			cout << "Ivedimas bus atliekamas is atsitiktiniu skaiciu nuo 0 iki 10: " << endl;
-			cout << "\nIveskite studento varda: ";
-			input >> set_data.id_name;
-			cout << "Iveskite studento pavarde: ";
-			input >> set_data.id_surname;
-			cout << "\nNamu darbu ir egzamino rezultatu generavimas. ";
-			cout << "\nIveskite namu darbu kieki: ";
-			cin >> ndqty;
-			for (int i = 0; i < ndqty; i++) {
-				count++;
-				cout <<"\n"<< count << "" << setw(3) << ". Namu darbo ivertinimas : ";
-				rez = rand() % 11;
-				cout << rez;
-				set_data.nd.push_back(rez);
-			}
-			exam = rand() % 11;
-			set_data.exam = exam;
-			cout << "\nEkzamino rezultats: ";
-			cout << exam << endl;
-		}
+
 		set_data.setDataMean();
 		set_data.setDataMedian();
 		set_data.setDataGradeMean();
@@ -173,42 +111,20 @@ public:
 	}
 
 	friend ostream& operator<<(ostream& output, const student& set_data) {
-		int option = 0;
-		output << "--------------------------------------------------------------------------" << endl;
-		output << "|                                                                         |" << endl;
-		output << "|   Pasirinkimu sarasas duomenu ivesties / isvesties                      |" << endl;
-		output << "|                                                                         |" << endl;
-		output << "--------------------------------------------------------------------------" << endl;
-		output << "| 1. Pateikti namu darbu iverciu vidurki;                                 |" << endl;
-		output << "| 2. Pateikti namu darbu iverciu mediana;                                 |" << endl;
-		output << "| 3. Pateikti galutini iverti vadovaujantis vidurkiu;                     |" << endl;
-		output << "| 4. Pateikti galutini iverti vadovaujantis medianu;                      |" << endl;
-		output << "| 5. Pateikti galutini iverti vadovaujantis vidurkiu ir medianu;          |" << endl;
-		output << "--------------------------------------------------------------------------" << endl;
-		output << "Pasirinkite varianta: ";
-		cin >> option;
-		while (option > 5 || option < 1) {
-			cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
-			cin >> option;
-		};
-		system("CLS");
-		output <<left<< fixed << setprecision(2);
-		output << "" << setw(5)<<"Vardas" << setw(10) <<""<< setw(4) << "Pavarde" << setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
-		output << "--------------------------------------------------------------------------" << endl;
 		if (option == 1) {
-			output << setw(15) << left << set_data.id_name << "" << setw(15) << set_data.id_surname << "" << setw(35) <<"" << setw(15)<< set_data.median << endl;
+			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << "" << setw(15) << set_data.id_surname << setw(15) << "" << set_data.mean << endl;
 		}
 		if (option == 2) {
-			output << setw(15) << left << set_data.id_name << "" << setw(15) << set_data.id_surname << "" << setw(35) <<"" << set_data.mean << endl;
+			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << "" << setw(15) << set_data.id_surname << "" << setw(35) << "" << set_data.median << endl;
 		}
 		if (option == 3) {
-			output << setw(15) << left << set_data.id_name << "" << setw(15) << set_data.id_surname << "" << setw(35) <<""<< set_data.gradeMean << endl;
+			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << "" << setw(15) << set_data.id_surname << "" << setw(35) << "" << set_data.gradeMean << endl;
 		}
 		if (option == 4) {
-			output << setw(15) << left << set_data.id_name << setw(15) << set_data.id_surname << setw(15) << "" << setw(15) << set_data.gradeMedian << endl;
+			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << setw(15) << set_data.id_surname << setw(15) << "" << setw(15) << set_data.gradeMedian << endl;
 		}
 		if (option == 5) {
-			output << setw(15) << left << set_data.id_name << setw(15) << set_data.id_surname << setw(15) << set_data.gradeMean << setw(15) << set_data.gradeMedian << endl;
+			output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << setw(15) << set_data.id_surname << setw(15) << set_data.gradeMean << setw(15) << set_data.gradeMedian << endl;
 		}
 		return output;
 	}
@@ -216,94 +132,167 @@ public:
 };
 
 int main() {
-	char indata = 'z';
+	int rez;
+	int ndqty;
+	int count = 0;
+	int menuIndex = 5;
+	float exam1;
+	char n = 'z';
+	string s;
+	string temp;
+	string id_name1;
+	string id_surname1;
 	vector<student> list;
+	student getObject;
 	vector<float> nd;
-	int menuIndex = 0;
-	char n ='n';
-	cout << "--------------------------------------------------------------------------" << endl;
-	cout << "|                                                                         |" << endl;
-	cout << "|                  Studentu pazymiu apdorojimo programa                   |" << endl;
-	cout << "|                                                                         |" << endl;
-	cout << "--------------------------------------------------------------------------" << endl;
-	cout << "| 1. Darbas su studentu duomenimis;                                       |" << endl;
-	cout << "| 2. Duomenu nuskaitymas is failo;                                        |" << endl;
-	cout << "| 0. Nutraukti darba.                                                     |" << endl;
-	cout << "--------------------------------------------------------------------------" << endl;
-	cout << "Iveskite pasirinkimo numeri: ";
-	cin >> menuIndex;
-	while (menuIndex > 2 || menuIndex < 0) {
-		cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
+	srand(time(NULL));
+	for (;;) {
+		system("CLS");
+		cout << "--------------------------------------------------------------------------" << endl;
+		cout << "|                                                                         |" << endl;
+		cout << "|                  Studentu pazymiu apdorojimo programa                   |" << endl;
+		cout << "|                                                                         |" << endl;
+		cout << "--------------------------------------------------------------------------" << endl;
+		cout << "| 1. Ivedinet student duomenis;                                           |" << endl;
+		cout << "| 2. Generuot atsitiktinius pazymius namu darbu ir egzamono;              |" << endl;
+		cout << "| 3. Duomenu nuskaitymas is failo;                                        |" << endl;
+		cout << "| 0. Nutraukti darba.                                                     |" << endl;
+		cout << "--------------------------------------------------------------------------" << endl;
+		cout << "Iveskite pasirinkimo numeri: ";
 		cin >> menuIndex;
-	};
-	system("CLS");
-	switch (menuIndex) {
-	case 1:
-		for (;;) {
-			student getObject;
-			while ( indata !='n' ) {
-				cin >> getObject;
-				list.push_back(getObject);
-				cout << "\nDuomenys ivestis.\nPratest duomenu suvedima (y/n): ";
-				cin >> indata;
-				if (indata != 'y') {
-					cout << getObject;
-				}
-			};
-			//		TEST INPUT DATA
-			//getObject.printMedian();
-			//getObject.printMean();
-			//getObject.printAllMean();
-			//getObject.printAllMedian();
-			//system("CLS");
-			getObject.~student();
+		while (menuIndex > 3 || menuIndex < 0) {
+			cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
+			cin >> menuIndex;
+		};
+		if (menuIndex == 0) {
+			return 0;
 		}
 		system("CLS");
-	case 2:
-		ifstream ins("indata.txt");
-		string s,tempnama, tempsurname;
-		
-		vector<float>temppaz;
-		float tempp;
-		float temex;
-
-		getline(ins, s);
-		while (ins) {
-			getline(ins, s);
-			if (!ins) break;
-			istringstream sts(s);
-				string temp;
-				sts >> tempnama >> tempsurname;
-				
-				while (sts) {
-					sts >> tempp;
-					temppaz.push_back(tempp);
-				}
-				temex = temppaz.at(temppaz.size() - 1);
-				temppaz.pop_back();
-
-				student stutemp(tempnama, tempsurname, temppaz, temex);
-				temppaz.clear();
-
-				list.push_back(stutemp);
-				stutemp.~student();
-		}
-	
-		for (auto& a : list)
-		{
-			a.printAllMedian();
+		cout << "--------------------------------------------------------------------------" << endl;
+		cout << "|                                                                         |" << endl;
+		cout << "|   Rezultato pateikimo pasirinkimas                                      |" << endl;
+		cout << "|                                                                         |" << endl;
+		cout << "--------------------------------------------------------------------------" << endl;
+		cout << "| 1. Pateikti namu darbu iverciu vidurki;                                 |" << endl;
+		cout << "| 2. Pateikti namu darbu iverciu mediana;                                 |" << endl;
+		cout << "| 3. Pateikti galutini iverti vadovaujantis vidurkiu;                     |" << endl;
+		cout << "| 4. Pateikti galutini iverti vadovaujantis medianu;                      |" << endl;
+		cout << "| 5. Pateikti galutini iverti vadovaujantis vidurkiu ir medianu;          |" << endl;
+		cout << "--------------------------------------------------------------------------" << endl;
+		cout << "Pasirinkite varianta: ";
+		cin >> option;
+		while (option > 5 || option < 1) {
+			cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
+			cin >> option;
 		};
-		break;
+		system("CLS");
+		if (menuIndex == 1) {
+			cout << "Ivedimas bus atliekamas rankiniu budu: " << endl;
+			cout << "\nIveskite studento varda: ";
+			cin >> id_name1;
+			cout << "Iveskite studento pavarde: ";
+			cin >> id_surname1;
+			while (n != 'n')
+			{
+				cout << "Iveskite namu darbu rezultatus: ";
+				cin >> rez;
+				count++;
+				cout << count << ". Namu darbo ivertinimas : ";
+				cout << rez;
+				nd.push_back(rez);
+				cout << "\n\tTest ivedima (y/n): ";
+				cin >> n;
+			}
+			n = 'z';
+			cout << "\nIveskite ekzamino rezultata: ";
+			cin >> exam1;
+
+			system("CLS");
+
+			cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde"
+				<< setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
+			cout << "--------------------------------------------------------------------------" << endl;
+
+			student getObject(id_name1, id_surname1, nd, exam1);
+			list.push_back(getObject);
+			cout << getObject;
+			getObject.~student();
+			system("pause");
+		}
+		if (menuIndex == 2) {
+			cout << "Ivedimas bus atliekamas is atsitiktiniu skaiciu nuo 0 iki 10: " << endl;
+			cout << "\nIveskite namu darbu kieki: ";
+			cin >> ndqty;
+			id_name1 = "Vardas(rnd)";
+			id_surname1 = "Pavarde(rnd)";
+			for (int i = 0; i < ndqty; i++) {
+				count++;
+				cout << "\n" << count << "" << setw(3) << ". Namu darbo ivertinimas : ";
+				rez = rand() % 11;
+				cout << rez;
+				nd.push_back(rez);
+			}
+			exam1 = rand() % 11;
+			cout << "\n\nEkzamino rezultats: ";
+			cout << exam1 << endl << endl;
+
+			//system("CLS");
+			cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde"
+				<< setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
+			cout << "--------------------------------------------------------------------------" << endl;
+
+			student getObject(id_name1, id_surname1, nd, exam1);
+			list.push_back(getObject);
+			cout << getObject;
+			getObject.~student();
+			system("pause");
+		}
+
+
+
+		if (menuIndex == 3) {
+			system("CLS");
+			/*	cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde" << setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
+			cout << "--------------------------------------------------------------------------" << endl;*/
+			option = 6;
+
+			ifstream ins("indata.txt");
+
+			getline(ins, s);
+			while (ins) {
+				getline(ins, s);
+				if (!ins) break;
+				istringstream sts(s);
+				sts >> id_name1 >> id_surname1;
+
+				while (sts) {
+					sts >> rez;
+					nd.push_back(rez);
+				}
+				exam1 = nd.at(nd.size() - 1);
+				nd.pop_back();
+
+				student getObject(id_name1, id_surname1, nd, exam1);
+				nd.clear();
+				list.push_back(getObject);
+				cout << getObject;
+				getObject.~student();
+			}
+			//cout << "--------------------------------------------------------------------------" << endl;
+			//		for (int i = 0; i < list.size(); i++) {
+			//			cout << list[i];
+			//			return 0;
+			//		}
+		}
 	}
-	system("pause");
+	//cin.get(); 
 };
 
 void student::setDataMean() {
 	mean = 0;
 	float sum = 0;
 
-	for (auto& a : nd)
-	{
+	for (auto& a : nd) {
 		sum = sum + a;
 	}
 	mean = sum / nd.size();
@@ -312,7 +301,6 @@ void student::setDataMean() {
 void student::setDataMedian() {
 
 	median = 0;
-
 	int size = nd.size();
 
 	sort(nd.begin(), nd.end());
@@ -338,18 +326,18 @@ float student::setDataGradeMedian() {
 
 void student::printMean() {
 	setDataMean();
-	cout << left << id_surname << setw(15) << left << id_name << setw(15) << mean <<endl;
+	cout << id_surname << id_name << mean;
 }
 
 void student::printMedian() {
 	setDataMedian();
-	cout << left << id_surname <<"" <<setw(15) <<""<< id_name << setw(15) << "" << setw(18) << median << endl;
+	cout << id_surname << id_name << median;
 }
 
 void student::printAllMean() {
-	cout << left << id_surname << setw(15) << id_name << setw(15) << gradeMean << setw(15) << gradeMedian<<endl;
+	cout << id_surname << id_name << gradeMean << gradeMedian;
 }
 
 void student::printAllMedian() {
-	cout << left << id_surname << setw(15) << id_name << setw(15) << "" << setw(15) << gradeMedian << endl;
+	cout << id_surname << id_name << gradeMedian;
 }
