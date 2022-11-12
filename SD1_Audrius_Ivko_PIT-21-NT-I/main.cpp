@@ -37,7 +37,6 @@ using	std::istringstream;
 int option = 0;
 
 class student {
-public:
 	string id_name;
 	string id_surname;
 	vector<float>nd;
@@ -53,7 +52,13 @@ public:
 	string get_name() const {
 		return id_name;
 	}
-	
+	void Set_surname(string a) {
+		id_surname = a;
+	}
+	string get_surname() const {
+		return id_surname;
+	}
+
 
 	student() {
 		id_surname = "no surname";
@@ -65,6 +70,12 @@ public:
 		gradeMean = 0;
 		gradeMedian = 0;
 	}
+	student(string s_id_name, string s_id_surname, float s_gradeMean, float s_gradeMedian) {
+		id_name = s_id_name;
+		id_surname = s_id_surname;
+		gradeMean = s_gradeMean;
+		gradeMedian = s_gradeMedian;
+	}
 
 	student(string new_id_name, string new_id_surname, vector<float>new_nd, float new_exam) {
 		id_name = new_id_name;
@@ -72,10 +83,10 @@ public:
 		nd = new_nd;
 		exam = new_exam;
 
-		setDataMean();
+		/*setDataMean();
 		setDataMedian();
 		setDataGradeMean();
-		setDataGradeMedian();
+		setDataGradeMedian();*/
 	}
 
 	student(const student& original) {
@@ -133,13 +144,9 @@ public:
 		return output;
 	}
 
-	
+
 	~student() {};
 };
-
-bool comparator(const student& lhs, const student& rhs) {
-	return lhs.id_name < rhs.id_name;
-}
 
 int main()
 {
@@ -153,10 +160,10 @@ int main()
 	string temp;
 	string id_naTemp;
 	string id_suTemp;
-	student getObj;
 	vector<student> list;
 	vector<float> nd;
 	srand(time(NULL));
+
 	for (;;)
 	{
 		system("CLS");
@@ -179,7 +186,7 @@ int main()
 		};
 		if (mIndex == 0)
 		{
-			return 0;
+			break;
 		}
 		system("CLS");
 		cout << "--------------------------------------------------------------------------" << endl;
@@ -223,21 +230,24 @@ int main()
 			cout << "\nIveskite ekzamino rezultata: ";
 			cin >> exTemp;
 
-			system("CLS");
+			//system("CLS");
 
 			cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde"
 				<< setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
 			cout << "--------------------------------------------------------------------------" << endl;
 
 			student getObj(id_naTemp, id_suTemp, nd, exTemp);
+			cin >> getObj;
 			nd.clear();
 			list.push_back(getObj);
 			cout << getObj;
 			getObj.~student();
+			system("pause");
 
 		}
 		if (mIndex == 2)
 		{
+
 			count = 0;
 			cout << "Ivedimas bus atliekamas is atsitiktiniu skaiciu nuo 0 iki 10: " << endl;
 			cout << "\nIveskite namu darbu kieki: ";
@@ -263,63 +273,57 @@ int main()
 			cout << "--------------------------------------------------------------------------" << endl;
 
 			student getObj(id_naTemp, id_suTemp, nd, exTemp);
+			cin >> getObj;
 			nd.clear();
 			list.push_back(getObj);
 			cout << getObj;
 			getObj.~student();
-
+			system("pause");
 		}
 		if (mIndex == 3)
 		{
-			system("CLS");
-			cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde" << setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
-			cout << "--------------------------------------------------------------------------" << endl;
-
-			ifstream ins("indata.txt");
-
-			getline(ins, s);
-			while (ins)
 			{
+				system("CLS");
+				cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde" << setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
+				cout << "--------------------------------------------------------------------------" << endl;
+
+				ifstream ins("indata.txt");
+
 				getline(ins, s);
-				if (!ins) break;
-				istringstream sts(s);
-				sts >> id_naTemp >> id_suTemp;
-				while (sts)
+				while (ins)
 				{
-					sts >> rez;
-					nd.push_back(rez);
-				}
-				exTemp = nd.at(nd.size() - 1);
-				nd.pop_back();
-
-				student getObj(id_naTemp, id_suTemp, nd, exTemp);
-				nd.clear();
-				list.push_back(getObj);
-
-				
-
-
-				cout << getObj;
-				getObj.~student();
-				
-			}
-		sort(list.begin(), list.end(), &comparator);
-		for (int i = 0; i < list.size(); i++) {
-					cout << list[i];
-					cin >> n;
-						return 0;
+					getline(ins, s);
+					if (!ins) break;
+					istringstream sts(s);
+					sts >> id_naTemp >> id_suTemp;
+					while (sts)
+					{
+						sts >> rez;
+						nd.push_back(rez);
 					}
-			
-			
+					exTemp = nd.at(nd.size() - 1);
+					nd.pop_back();
 
-			/*list.clear();*/
-
+					student getObj(id_naTemp, id_suTemp, nd, exTemp);
+					cin >> getObj;
+					nd.clear();
+					list.push_back(getObj);
+					getObj.~student();
+				}
+				sort(list.begin(), list.end(),
+					[](const student& x, student& y)
+					{
+						return x.get_name() < y.get_name();
+					});
+				for (int i = 0; i < list.size(); ++i)
+				{
+					cout << list.at(i);
+				};
+			}
 		}
-		system("pause");
-
-
 	}
-
+	system("pause");
+	return 0;
 };
 
 void student::setDataMean() {
@@ -371,9 +375,12 @@ void student::printMedian() {
 }
 
 void student::printAllMean() {
-	cout << id_surname << id_name << gradeMean << gradeMedian;
+	cout << "\n" << id_surname << endl;
+	cout << "\n" << id_name << endl;
+	cout << "\n" << gradeMean << endl;
+	cout << "\n" << gradeMedian << endl;
 }
 
 void student::printAllMedian() {
-	cout << id_surname << id_name << gradeMedian;
+	cout << id_surname << " / " << id_name << " / " << gradeMedian;
 }
