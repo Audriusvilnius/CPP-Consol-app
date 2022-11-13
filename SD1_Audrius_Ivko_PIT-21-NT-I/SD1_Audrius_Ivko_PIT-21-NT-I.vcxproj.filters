@@ -31,7 +31,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="indata.txt" />
+    <Text Include="kursiokai.txt" />
     <Text Include="outdata.txt" />
   </ItemGroup>
 </Project>

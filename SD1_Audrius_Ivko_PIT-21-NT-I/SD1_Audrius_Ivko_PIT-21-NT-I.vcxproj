@@ -135,7 +135,7 @@
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="indata.txt" />
+    <Text Include="kursiokai.txt" />
     <Text Include="outdata.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

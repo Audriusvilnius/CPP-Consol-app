@@ -31,6 +31,7 @@ using	std::sort;
 using	std::getline;
 using	std::ifstream;
 using	std::istringstream;
+using	std::to_string;
 
 //#include "Header.h"
 
@@ -139,11 +140,17 @@ public:
 	}
 	~student() {};
 };
+void prtintrez() {
+	cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde"
+		<< setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
+	cout << "--------------------------------------------------------------------------" << endl;
+};
 
 int main()
 {
 	int rez;
 	int ndqty;
+	int stqty;
 	int count = 0;
 	int mIndex = 1;
 	float exTemp;
@@ -161,7 +168,7 @@ int main()
 	cout << "|                  Studentu pazymiu apdorojimo programa                   |" << endl;
 	cout << "|                                                                         |" << endl;
 	cout << "--------------------------------------------------------------------------" << endl;
-	while ( mIndex !=0 )
+	while (mIndex != 0)
 	{
 		cout << "--------------------------------------------------------------------------" << endl;
 		cout << "|               Ivest naujus duomenis / Papildyt esamus                   |" << endl;
@@ -175,6 +182,7 @@ int main()
 		cout << "--------------------------------------------------------------------------" << endl;
 		cout << "Iveskite pasirinkimo numeri: ";
 		cin >> mIndex;
+
 		while (mIndex > 5 || mIndex < 0)
 		{
 			cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
@@ -226,13 +234,8 @@ int main()
 			n = 'z';
 			cout << "\nIveskite ekzamino rezultata: ";
 			cin >> exTemp;
-
 			//system("CLS");
-
-			cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde"
-				<< setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
-			cout << "--------------------------------------------------------------------------" << endl;
-
+			prtintrez();
 			student getObj(id_naTemp, id_suTemp, nd, exTemp);
 			cin >> getObj;
 			nd.clear();
@@ -244,48 +247,47 @@ int main()
 		}
 		if (mIndex == 2)
 		{
-			count = 0;
 			cout << "Ivedimas bus atliekamas is atsitiktiniu skaiciu nuo 0 iki 10: " << endl;
 			cout << "\nIveskite namu darbu kieki: ";
 			cin >> ndqty;
-			id_naTemp = "Vardas(rnd)";
-			id_suTemp = "Pavarde(rnd)";
-			for (int i = 0; i < ndqty; i++)
-			{
-				count++;
-				cout << "\n" << count << "" << setw(3) << ". Namu darbo ivertinimas : ";
-				rez = rand() % 11;
-				cout << rez;
-				nd.push_back(rez);
+			cout << "\nIveskite studentu kieki: ";
+			cin >> stqty;
+			prtintrez();
+			for (int i = 1; i < stqty + 1; i++) {
+				//count = 0;
+				string name = "Vardas";
+				string surname = "Pavarde";
+				name += to_string(i);
+				surname += to_string(i);
+				id_naTemp = name;
+				id_suTemp = surname;
+				for (int i = 0; i < ndqty; i++)
+				{
+					//count++;
+					//cout << "\n" << name << " " << surname << " " << count << "" << setw(3) << ". Namu darbo ivertinimas : ";
+					rez = rand() % 11;
+					//cout << rez;
+					nd.push_back(rez);
+				}
+				exTemp = rand() % 11;
+				//cout << "\n\nEkzamino rezultats: ";
+				//cout << exTemp << endl << endl;
+				//system("CLS");
+				student getObj(id_naTemp, id_suTemp, nd, exTemp);
+				cin >> getObj;
+				nd.clear();
+				list.push_back(getObj);
+				cout << getObj;
+				getObj.~student();
 			}
-			exTemp = rand() % 11;
-
-			cout << "\n\nEkzamino rezultats: ";
-			cout << exTemp << endl << endl;
-
-			//system("CLS");
-
-			cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde"
-				<< setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
-			cout << "--------------------------------------------------------------------------" << endl;
-
-			student getObj(id_naTemp, id_suTemp, nd, exTemp);
-			cin >> getObj;
-			nd.clear();
-			list.push_back(getObj);
-			cout << getObj;
-			getObj.~student();
 			system("pause");
 			system("CLS");
 		}
 		if (mIndex == 3)
 		{
 			system("CLS");
-			cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde" << setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
-			cout << "--------------------------------------------------------------------------" << endl;
-
-			ifstream ins("indata.txt");
-
+			prtintrez();
+			ifstream ins("kursiokai.txt");
 			getline(ins, s);
 			while (ins)
 			{
@@ -300,13 +302,13 @@ int main()
 				}
 				exTemp = nd.at(nd.size() - 1);
 				nd.pop_back();
-
 				student getObj(id_naTemp, id_suTemp, nd, exTemp);
 				cin >> getObj;
 				nd.clear();
 				list.push_back(getObj);
 				getObj.~student();
 			}
+			ins.close();
 			sort(list.begin(), list.end(),
 				[](const student& x, student& y)
 				{
@@ -318,13 +320,10 @@ int main()
 			};
 			system("pause");
 			system("CLS");
-
 		}
 		if (mIndex == 4)
 		{
-			cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde"
-				<< setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
-			cout << "--------------------------------------------------------------------------" << endl;
+			prtintrez();
 			sort(list.begin(), list.end(),
 				[](const student& x, student& y)
 				{
@@ -345,7 +344,6 @@ int main()
 			system("CLS");
 		}
 	}
-
 	return 0;
 };
 
@@ -358,7 +356,6 @@ void student::setDataMean() {
 	}
 	mean = sum / nd.size();
 }
-
 void student::setDataMedian() {
 
 	median = 0;
@@ -373,7 +370,6 @@ void student::setDataMedian() {
 		median = (nd.at(size / 2 - 1) + nd.at(size / 2)) / 2;
 	}
 }
-
 float student::setDataGradeMean() {
 	setDataMean();
 	gradeMean = ((mean * 0.4) + (exam * 0.6));
