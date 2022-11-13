@@ -13,6 +13,7 @@
 #include <chrono>
 #include <time.h>
 #include <sstream>
+#include <exception>
 
 
 using	std::cout;
@@ -32,6 +33,9 @@ using	std::getline;
 using	std::ifstream;
 using	std::istringstream;
 using	std::to_string;
+using	std::runtime_error;
+
+
 
 //#include "Header.h"
 
@@ -140,20 +144,38 @@ public:
 	}
 	~student() {};
 };
-void prtintrez() {
+
+void prtintrez() 
+{
 	cout << "" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde"
 		<< setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
 	cout << "--------------------------------------------------------------------------" << endl;
 };
 
+float checknd(float nd) 
+{
+	if (nd < 0 || nd > 10) {
+		throw runtime_error("\nIvesta namu darbu reikme negali but maziau uz 0 ir daugiau uz 10\n");
+	}
+	return nd;
+};
+
+float checkex(float ex) {
+	if (ex < 0 || ex > 10) {
+		throw runtime_error("\nIvesta eksamino reikme negali but maziau uz 0 ir daugiau uz 10\n");
+	}
+	return ex;
+};
+
+
 int main()
 {
-	int rez;
+	int rez = 0;
 	int ndqty;
 	int stqty;
 	int count = 0;
 	int mIndex = 1;
-	float exTemp;
+	float exTemp = -1;
 	char n = 'z';
 	string s;
 	string temp;
@@ -190,7 +212,7 @@ int main()
 		};
 		if (mIndex == 0)
 		{
-			break;
+			return 0;
 		}
 		system("CLS");
 		if (mIndex != 5)
@@ -205,35 +227,58 @@ int main()
 			cout << "| 3. Pateikti galutini iverti vadovaujantis vidurkiu;                     |" << endl;
 			cout << "| 4. Pateikti galutini iverti vadovaujantis medianu;                      |" << endl;
 			cout << "| 5. Pateikti galutinius iverti vadovaujantis vidurkiu ir medianu;        |" << endl;
+			cout << "| 0. Nutraukti darba.                                                     |" << endl;
 			cout << "--------------------------------------------------------------------------" << endl;
 			cout << "Pasirinkite varianta: ";
 			cin >> option;
-			while (option > 5 || option < 1)
+			while (option > 5 || option < 0)
 			{
 				cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
 				cin >> option;
 			};
+			if (mIndex == 0)
+			{
+				return 0;
+			}
 		}
 		system("CLS");
 		if (mIndex == 1)
 		{
-			count = 0;
+			count = 1;
 			cout << "\nIveskite studento varda: ";
 			cin >> id_naTemp;
 			cout << "Iveskite studento pavarde: ";
 			cin >> id_suTemp;
 			while (n != 'n')
 			{
-				count++;
-				cout << "Iveskite namu darbo Nr." << count << " vertinima: ";
+				cout << "Iveskite namu darbo vertinima: ";
 				cin >> rez;
-				cout << "Test ivedima(y / n) :";
-				nd.push_back(rez);
-				cin >> n;
+				try
+				{
+					checknd(rez);
+					nd.push_back(rez);
+					cout << "Test ivedima(y / n) :";
+					cin >> n;
+				}
+				catch (runtime_error& e)
+				{
+					cout << "\n\t\tDemesio !!!  " << e.what();
+				}
 			}
 			n = 'z';
-			cout << "\nIveskite ekzamino rezultata: ";
-			cin >> exTemp;
+			while (exTemp > 10 || exTemp < 0)
+			{
+				cout << "\nIveskite ekzamino rezultata: ";
+				cin >> exTemp;
+				try
+				{
+					checkex(exTemp);
+				}
+				catch (runtime_error& e)
+				{
+					cout << "\n\t\tDemesio !!!  " << e.what();
+				}
+			}
 			//system("CLS");
 			prtintrez();
 			student getObj(id_naTemp, id_suTemp, nd, exTemp);
@@ -242,12 +287,13 @@ int main()
 			list.push_back(getObj);
 			cout << getObj;
 			getObj.~student();
+			exTemp = -1;
 			system("pause");
 			system("CLS");
 		}
 		if (mIndex == 2)
 		{
-			cout << "Ivedimas bus atliekamas is atsitiktiniu skaiciu nuo 0 iki 10: " << endl;
+			cout << "Namu darbu ivedimas bus atliekamas is atsitiktiniu skaiciu nuo 0 iki 10: " << endl;
 			cout << "\nIveskite namu darbu kieki: ";
 			cin >> ndqty;
 			cout << "\nIveskite studentu kieki: ";
@@ -263,16 +309,10 @@ int main()
 				id_suTemp = surname;
 				for (int i = 0; i < ndqty; i++)
 				{
-					//count++;
-					//cout << "\n" << name << " " << surname << " " << count << "" << setw(3) << ". Namu darbo ivertinimas : ";
 					rez = rand() % 11;
-					//cout << rez;
 					nd.push_back(rez);
 				}
 				exTemp = rand() % 11;
-				//cout << "\n\nEkzamino rezultats: ";
-				//cout << exTemp << endl << endl;
-				//system("CLS");
 				student getObj(id_naTemp, id_suTemp, nd, exTemp);
 				cin >> getObj;
 				nd.clear();
@@ -344,7 +384,6 @@ int main()
 			system("CLS");
 		}
 	}
-	return 0;
 };
 
 void student::setDataMean() {
