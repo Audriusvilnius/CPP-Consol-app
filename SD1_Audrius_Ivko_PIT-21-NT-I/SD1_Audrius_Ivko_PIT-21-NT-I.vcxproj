@@ -128,13 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="student.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="funktion.h" />
+    <ClInclude Include="global.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="student.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="indata.txt" />
+    <Text Include="kursiokai.txt" />
     <Text Include="outdata.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
