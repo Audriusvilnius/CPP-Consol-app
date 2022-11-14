@@ -1,37 +1,37 @@
 #include "Header.h"
-#include "student.h"
 #include "global.h"
+#include "student.h"
 
 student::student() {
-	id_surname = "no surname";
-	id_name = "no name";
-	vector<float>nd{ 0 };
 	exam = 0;
 	mean = 0;
 	median = 0;
 	gradeMean = 0;
 	gradeMedian = 0;
+	id_name = "no name";
+	vector<float>nd{ 0 };
+	id_surname = "no surname";
 };
 student::student(string s_id_name, string s_id_surname, float s_gradeMean, float s_gradeMedian) {
 	id_name = s_id_name;
-	id_surname = s_id_surname;
 	gradeMean = s_gradeMean;
+	id_surname = s_id_surname;
 	gradeMedian = s_gradeMedian;
 };
 
 student::student(string new_id_name, string new_id_surname, vector<float>new_nd, float new_exam) {
-	id_name = new_id_name;
-	id_surname = new_id_surname;
 	nd = new_nd;
 	exam = new_exam;
+	id_name = new_id_name;
+	id_surname = new_id_surname;
 };
 
 student::student(const student& original) {
-	id_name = original.id_name;
-	id_surname = original.id_surname;
 	nd = original.nd;
 	exam = original.exam;
+	id_name = original.id_name;
 	gradeMean = original.gradeMean;
+	id_surname = original.id_surname;
 	gradeMedian = original.gradeMedian;
 };
 
@@ -64,8 +64,6 @@ ostream& operator<<(ostream& output, const student& set_data) {
 	}
 	return output;
 };
-
-
 
 
 void prtintrez()
@@ -127,26 +125,3 @@ float student::setDataGradeMedian() {
 	gradeMedian = ((median * 0.4) + (exam * 0.6));
 	return gradeMedian;
 };
-
-// Test void print solution 
-
-//void student::printMean() {
-//	setDataMean();
-//	cout << id_surname << id_name << mean;
-//}
-//
-//void student::printMedian() {
-//	setDataMedian();
-//	cout << id_surname << id_name << median;
-//}
-//
-//void student::printAllMean() {
-//	cout << "\n" << id_surname << endl;
-//	cout << "\n" << id_name << endl;
-//	cout << "\n" << gradeMean << endl;
-//	cout << "\n" << gradeMedian << endl;
-//}
-//
-//void student::printAllMedian() {
-//	cout << id_surname << " / " << id_name << " / " << gradeMedian;
-//}
