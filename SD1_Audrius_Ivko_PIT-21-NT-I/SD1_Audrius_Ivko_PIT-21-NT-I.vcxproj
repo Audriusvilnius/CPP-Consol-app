@@ -128,11 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="student.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="funktion.h" />
+    <ClInclude Include="global.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="main.h" />
+    <ClInclude Include="student.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="kursiokai.txt" />
