@@ -1,6 +1,6 @@
 #include "Header.h"
-#include "global.h"
 #include "student.h"
+#include "global.h"
 
 student::student() {
 	exam = 0;
