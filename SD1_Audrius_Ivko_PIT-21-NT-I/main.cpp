@@ -1,6 +1,6 @@
 #include "Header.h"
-#include "global.h"
 #include "student.h"
+#include "global.h"
 
 int option = 0;
 
@@ -17,6 +17,7 @@ int main()
 	string temp;
 	string id_naTemp;
 	string id_suTemp;
+	int temp_nd;
 	vector<student> list;
 	vector<float> nd;
 	srand(time(NULL));
@@ -36,6 +37,7 @@ int main()
 		cout << "| 3. Pridet duomenis nuskaitytus is failo;                                |" << endl;
 		cout << "| 4. Savestu duomenu rusiavimas pagal varda ir spausdinimas               |" << endl;
 		cout << "| 5. Panaikinti suvestus duomenis                                         |" << endl;
+		cout << "| 6. Atsitiktiniu pazymiu issaugijimas i faila                            |" << endl;
 		cout << "| 0. Nutraukti darba.                                                     |" << endl;
 		cout << "--------------------------------------------------------------------------" << endl;
 		cout << "Iveskite pasirinkimo numeri: ";
@@ -210,5 +212,32 @@ int main()
 			system("pause");
 			system("CLS");
 		}
+		if (mIndex == 6)
+		{
+			cout << "Ivedimas bus atliekamas is atsitiktiniu skaiciu nuo 0 iki 10: " << endl;
+			cout << "\nIveskite studentu kieki: ";
+			cin >> stqty;
+			cout << "\nIveskite namu darbu kieki: ";
+			cin >> ndqty;
+			prtintrez();
+			for (int i = 1; i < stqty + 1; i++) {
+				string name = "Vardas";
+				string surname = "Pavarde";
+				name += to_string(i);
+				surname += to_string(i);
+				id_naTemp = name;
+				id_suTemp = surname;
+				for (int i = 0; i < ndqty; i++)
+				{
+					rez = rand() % 11;
+					nd.push_back(rez);
+				}
+				exTemp = rand() % 11;
+
+			}
+			system("pause");
+			system("CLS");
+		}
+		
 	}
 };
