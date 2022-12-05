@@ -1,14 +1,21 @@
-
-#include <iomanip>
+#include <list>
 #include <cmath>
 #include <string>
 #include <vector>
-#include <fstream>
-#include <stdlib.h>
-#include <algorithm>
-#include <iostream>
+#include <string>
+#include <random>
+#include <chrono>
+#include <time.h>
 #include <istream>
+#include <iomanip>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include <algorithm>
+#include <exception>
+#include <stdlib.h>
 
+//#include <ofstream>
 
 using	std::cout;
 using	std::cin;
@@ -20,6 +27,13 @@ using	std::left;
 using	std::right;
 using	std::string;
 using	std::vector;
+using	std::list;
 using	std::ostream;
 using	std::istream;
 using	std::sort;
+using	std::getline;
+using	std::ifstream;
+using	std::istringstream;
+using	std::to_string;
+using	std::runtime_error;
+using	std::ofstream;

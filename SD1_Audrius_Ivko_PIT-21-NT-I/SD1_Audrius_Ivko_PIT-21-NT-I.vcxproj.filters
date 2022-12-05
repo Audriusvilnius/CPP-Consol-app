@@ -18,20 +18,23 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="student.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="funktion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
+    <ClInclude Include="student.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="indata.txt" />
+    <Text Include="kursiokai.txt" />
     <Text Include="outdata.txt" />
   </ItemGroup>
 </Project>
