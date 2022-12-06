@@ -72,7 +72,12 @@ duomenys talpinami i sesis <T> tipo konteinerius. Vector, Deque ir List, kiekvie
 3. Vector tipo duo menu irasymas i faila is 1000000 objektu trukme: 16.2968 s/n
 
 
+#### Matavivai ir skaiciavimai atliekami su:
+  ##### Model Name:	MacBook Pro
+  ##### Chip:	Apple M1 Max
+  ##### Windows 11 - Parallels Accsess Version 7.0.5 
 
+  
 
 
 
