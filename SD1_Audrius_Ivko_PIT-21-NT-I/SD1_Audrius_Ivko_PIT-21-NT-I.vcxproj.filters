@@ -35,6 +35,5 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="kursiokai.txt" />
-    <Text Include="outdata.txt" />
   </ItemGroup>
 </Project>

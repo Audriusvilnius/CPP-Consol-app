@@ -1,6 +1,6 @@
 #include "Header.h"
-#include "student.h"
 #include "global.h"
+#include "student.h"
 
 student::student() {
 	exam = 0;
@@ -62,6 +62,10 @@ ostream& operator<<(ostream& output, const student& set_data) {
 	{
 		output << fixed << setprecision(2) << setw(15) << left << set_data.id_name << setw(15) << set_data.id_surname << setw(15) << "" << set_data.gradeMean << setw(15) << "" << set_data.gradeMedian << endl;
 	}
+	if (option == 7)
+	{
+		output << fixed << setprecision(2) << set_data.id_name << "\t" << set_data.id_surname << "\t" << set_data.gradeMean << "\n";
+	}
 	return output;
 };
 
@@ -72,6 +76,20 @@ void prtintrez()
 		<< setw(15) << "" << setw(10) << "Galutinis (Vid.)" << " / " << "Galutinis (Med.)" << endl;
 	cout << "--------------------------------------------------------------------------" << endl;
 };
+
+void prtint_Less()
+{
+	cout << "\n\n" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde"
+		<< setw(15) << "" << setw(10) << "Galutinis (Vid. < 5)" << endl;
+	cout << "--------------------------------------------------------------------------" << endl;
+};
+void prtint_Up()
+{
+	cout << "\n\n" << setw(5) << "Vardas" << setw(10) << "" << setw(4) << "Pavarde"
+		<< setw(15) << "" << setw(10) << "Galutinis (Vid. >= 5)" << endl;
+	cout << "--------------------------------------------------------------------------" << endl;
+};
+
 
 float checknd(float nd)
 {

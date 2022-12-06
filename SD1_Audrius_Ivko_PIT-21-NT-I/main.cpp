@@ -1,6 +1,7 @@
 #include "Header.h"
-#include "student.h"
 #include "global.h"
+#include "student.h"
+
 
 int option = 0;
 
@@ -17,8 +18,7 @@ int main()
 	string temp;
 	string id_naTemp;
 	string id_suTemp;
-	int temp_nd;
-	vector<student> list;
+	vector<student> dataV;
 	vector<float> nd;
 	srand(time(NULL));
 
@@ -36,14 +36,14 @@ int main()
 		cout << "| 2. Pridet generuojant atsitiktinius pazymius namu darbu ir egzamono;    |" << endl;
 		cout << "| 3. Pridet duomenis nuskaitytus is failo;                                |" << endl;
 		cout << "| 4. Savestu duomenu rusiavimas pagal varda ir spausdinimas               |" << endl;
-		cout << "| 5. Panaikinti suvestus duomenis                                         |" << endl;
-		cout << "| 6. Atsitiktiniu pazymiu issaugijimas i faila                            |" << endl;
+		cout << "| 5. Sarasu generavimas, greicio matavimas is atsitiktinius duomenu       |" << endl;
+		cout << "| 6. Panaikinti suvestus duomenis                                         |" << endl;
 		cout << "| 0. Nutraukti darba.                                                     |" << endl;
 		cout << "--------------------------------------------------------------------------" << endl;
 		cout << "Iveskite pasirinkimo numeri: ";
 		cin >> mIndex;
 
-		while (mIndex > 5 || mIndex < 0)
+		while (mIndex > 6 || mIndex < 0)
 		{
 			cout << "Tokio pasirinkimo nera iveskite tinkama numeri : ";
 			cin >> mIndex;
@@ -53,7 +53,7 @@ int main()
 			return 0;
 		}
 		system("CLS");
-		if (mIndex != 5)
+		if (mIndex < 5)
 		{
 			cout << "--------------------------------------------------------------------------" << endl;
 			cout << "|                                                                         |" << endl;
@@ -79,6 +79,11 @@ int main()
 				return 0;
 			}
 		}
+		if (mIndex == 5)
+		{
+			option = 3;
+		}
+
 		system("CLS");
 		if (mIndex == 1)
 		{
@@ -121,7 +126,7 @@ int main()
 			student getObj(id_naTemp, id_suTemp, nd, exTemp);
 			cin >> getObj;
 			nd.clear();
-			list.push_back(getObj);
+			dataV.push_back(getObj);
 			cout << getObj;
 			getObj.~student();
 			exTemp = -1;
@@ -149,10 +154,11 @@ int main()
 					nd.push_back(rez);
 				}
 				exTemp = rand() % 11;
+				system("pause");
 				student getObj(id_naTemp, id_suTemp, nd, exTemp);
 				cin >> getObj;
 				nd.clear();
-				list.push_back(getObj);
+				dataV.push_back(getObj);
 				cout << getObj;
 				getObj.~student();
 			}
@@ -181,7 +187,7 @@ int main()
 				student getObj(id_naTemp, id_suTemp, nd, exTemp);
 				cin >> getObj;
 				nd.clear();
-				list.push_back(getObj);
+				dataV.push_back(getObj);
 				cout << getObj;
 				getObj.~student();
 			}
@@ -192,34 +198,38 @@ int main()
 		}
 		if (mIndex == 4)
 		{
+
 			prtintrez();
-			sort(list.begin(), list.end(),
+			sort(dataV.begin(), dataV.end(),
 				[](const student& x, student& y)
 				{
 					return x.get_name() < y.get_name();
 				});
-			for (int i = 0; i < list.size(); ++i)
-			{
-				cout << list.at(i);
-			};
-			system("pause");
-			system("CLS");
+
+			for (auto& a : dataV) {
+				cout << a;
+			}
+
 		}
+
 		if (mIndex == 5) {
-			list.clear();
-			system("CLS");
-			cout << "\n\tDuomenis sekmingai istrinti" << endl << endl;
-			system("pause");
-			system("CLS");
-		}
-		if (mIndex == 6)
-		{
-			cout << "Ivedimas bus atliekamas is atsitiktiniu skaiciu nuo 0 iki 10: " << endl;
-			cout << "\nIveskite studentu kieki: ";
+			dataV.clear();
+			cout << "Programos greitoveikos matavimas." << endl;
+			cout << "Matuojama atskirai kiekvieno <T> tipo konteinerio greitoveika." << endl;
+			cout << "1. Kuriamas atsitiktiniu duomenu sarasas, kuriamai objektai ir atliekami skaiciavimai;" << endl;
+			cout << "2. Saras <T> Vector konteineris skaidomas i dvi dalis pagal pozimi, 5 balu vidurkio ir virs 5 balu vidurkio" << endl;
+			cout << "duomenys talpinami i sesis <T> tipo konteinerius. Vector, Deque ir List, kiekvieno po du;" << endl;
+			cout << "3. Rusiavimas <T> tipo Vector, Deque ir List konteineriu pagal balo vidurki;" << endl;
+			cout << "4. Kiekvienas tipas irasys duomenis i fala, greitoveika matuojama tik Vector tipo konteinerio;" << endl;
+			cout << "5. Generuojamas atsitiktinis studento: Vardas, Pavarde" << endl;
+			cout << "6. Generuojamas atsitiktinis egzamino balas" << endl;
+			cout << "7. Iveskite studentu kieki: ";
 			cin >> stqty;
-			cout << "\nIveskite namu darbu kieki: ";
+			cout << "8. Iveskite namu darbu kieki: ";
 			cin >> ndqty;
-			prtintrez();
+			system("CLS");
+			cout << "\nVyksta duomenu apdorojimas....\n" << endl;
+			auto start_Rnd = std::chrono::high_resolution_clock::now();
 			for (int i = 1; i < stqty + 1; i++) {
 				string name = "Vardas";
 				string surname = "Pavarde";
@@ -233,11 +243,236 @@ int main()
 					nd.push_back(rez);
 				}
 				exTemp = rand() % 11;
-
+				student getObj(id_naTemp, id_suTemp, nd, exTemp);
+				cin >> getObj;
+				nd.clear();
+				dataV.push_back(getObj);
+				getObj.~student();
 			}
+			auto start_List_sort = std::chrono::high_resolution_clock::now();
+
+			sort(dataV.begin(), dataV.end(),
+				[](const student& x, student& y)
+				{
+					return x.get_gradeMean() < y.get_gradeMean();
+				});
+
+			auto end_list_sort = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> sortL = end_list_sort - start_List_sort;
+
+			auto end_Rnd = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> rnd = end_Rnd - start_Rnd;
+
+			vector<student>V_dataUp;
+			vector<student>V_dataLess;
+
+			auto start_Vec_split = std::chrono::high_resolution_clock::now();
+
+			partition_copy(dataV.begin(), dataV.end(), back_inserter(V_dataUp), back_inserter(V_dataLess), [](student& x) {return x.get_gradeMean() >= 5; });
+
+			auto end_Vec_split = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> spliV = end_Vec_split - start_Vec_split;
+
+			auto start_Vec_sort = std::chrono::high_resolution_clock::now();
+
+			/*cout << "\n\nDuomenu skaidymas ir filtravimas is Vector tipo konteinerio" << endl;*/
+
+			sort(V_dataUp.begin(), V_dataUp.end(),
+				[](const student& x, student& y)
+				{
+					return x.get_gradeMean() < y.get_gradeMean();
+				});
+			/*prtint_Up();
+			/*for (auto& a : V_dataUp) {cout << a;}*/
+
+
+			sort(V_dataLess.begin(), V_dataLess.end(),
+				[](const student& x, student& y)
+				{
+					return x.get_gradeMean() > y.get_gradeMean();
+				});
+			/*prtint_Less();
+			for (auto& a : V_dataLess) {cout << a;}*/
+
+			auto end_Vec_sort = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> sortV = end_Vec_sort - start_Vec_sort;
+
+			option = 7;
+			auto start_Vec_stream = std::chrono::high_resolution_clock::now();
+
+			ofstream outlessvf("out_data_less.txt");
+			outlessvf << "Vardas" << "\t" << "Pavarde" << "\t" << "Vidurkis >= 5" << "\n";
+			for (auto& a : V_dataLess) {
+				outlessvf << a;
+			}
+			outlessvf.close();
+
+			ofstream outupvf("out_data_up.txt");
+			outupvf << "Vardas" << "\t" << "Pavarde" << "\t" << "Vidurkis < 5" << "\n";
+			for (auto& a : V_dataUp) {
+				outupvf << a;
+			}
+			outupvf.close();
+
+			auto end_Vec_stream = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> streamV = end_Vec_stream - start_Vec_stream;
+
+			option = 3;
+			/*system("pause");
+			system("CLS");
+
+			cout << "\n\nDuomenu skaidymas ir filtravimas is Deque tipo konteinerio" << endl;*/
+			deque<student>D_dataUp;
+			deque<student>D_dataLess;
+
+			auto start_Deq_split = std::chrono::high_resolution_clock::now();
+
+			partition_copy(dataV.begin(), dataV.end(), back_inserter(D_dataUp), back_inserter(D_dataLess), [](student& x) {return x.get_gradeMean() >= 5; });
+
+			auto end_Deq_split = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> splitD = end_Deq_split - start_Deq_split;
+
+			auto start_Deq_sort = std::chrono::high_resolution_clock::now();
+
+			sort(D_dataUp.begin(), D_dataUp.end(),
+				[](const student& x, student& y)
+				{
+					return x.get_gradeMean() < y.get_gradeMean();
+				});
+
+
+			/*prtint_Up();
+			/*for (auto& a : D_dataUp) {cout << a;}*/
+
+			sort(D_dataLess.begin(), D_dataLess.end(),
+				[](const student& x, student& y)
+				{
+					return x.get_gradeMean() > y.get_gradeMean();
+				});
+
+			auto end_Deq_sort = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> sortD = end_Deq_sort - start_Deq_sort;
+
+			/*prtint_Less();
+			for (auto& a : D_dataLess) {cout << a;}*/
+
+			option = 7;
+			ofstream outlessdf("out_data_less.txt");
+			outlessdf << "Vardas" << "\t" << "Pavarde" << "\t" << "Vidurkis >= 5" << "\n";
+			for (auto& a : D_dataUp) {
+				outupvf << a;
+			}
+			outlessdf.close();
+
+			ofstream outupdf("out_data_up.txt");
+			outupdf << "Vardas" << "\t" << "Pavarde" << "\t" << "Vidurkis < 5" << "\n";
+			for (auto& a : D_dataLess) {
+				outupvf << a;
+			}
+			outupdf.close();
+
+			/*system("pause");
+			system("CLS");*/
+
+			/*cout << "\n\nDuomenu kopijavimas is dvieju Vector tipo konteineriu i List tipo konteineris, duomenys jau atfiltruoti" << endl;*/
+			option = 3;
+
+			list<student> L_dataUp;
+			list<student> L_dataLess;
+
+			auto start_List_split = std::chrono::high_resolution_clock::now();
+
+			partition_copy(dataV.begin(), dataV.end(), back_inserter(L_dataUp), back_inserter(L_dataLess), [](student& x) {return x.get_gradeMean() >= 5; });
+
+			auto end_List_split = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> splitL = end_List_split - start_List_split;
+
+			//L_dataUp.sort();
+			//L_dataLess.sort();
+
+			/*L_dataUp.sort([](const student& x, const student& y)
+				{
+					if (x.get_gradeMean() == y.get_gradeMean())
+					return x < y;
+					return x.get_gradeMean() < y.get_gradeMean();
+				});*/
+
+
+				//copy(V_dataUp.begin(), V_dataUp.end(), back_inserter(L_dataUp));
+				//copy(V_dataLess.begin(), V_dataLess.end(),back_inserter(L_dataLess));
+
+				/*prtint_Less();
+				for (const student& i : L_dataUp) {
+					cout << i;
+				}*/
+
+
+				/*prtint_Up();
+				for (const student& i : L_dataLess) {
+					cout << i;
+				}*/
+
+			option = 7;
+
+			ofstream outlesslf("out_data_less.txt");
+			outlesslf << "Vardas" << "\t" << "Pavarde" << "\t" << "Vidurkis >= 5 list\n";
+			for (const student& i : L_dataUp)
+			{
+				outlesslf << i;
+			}
+			outlesslf.close();
+
+			ofstream outuplf("out_data_up.txt");
+			outuplf << "Vardas" << "\t" << "Pavarde" << "\t" << "Vidurkis < 5" << "\n";
+			for (const student& i : L_dataLess)
+			{
+				outuplf << i;
+			}
+			outuplf.close();
+
+			V_dataUp.clear();
+			V_dataLess.clear();
+			D_dataLess.clear();
+			D_dataLess.clear();
+			L_dataUp.clear();
+			L_dataLess.clear();
+			dataV.clear();
+
+			system("CLS");
+
+			cout << "Matuojama atskirai kiekvieno <T> tipo konteinerio greitoveika." << endl;
+			cout << "1. Kuriamas atsitiktiniu duomenu sarasas, kuriamai objektai ir atliekami skaiciavimai;" << endl;
+			cout << "2. Saras <T> Vector konteineris skaidomas i dvi dalis pagal pozimi, 5 balu vidurkio ir virs 5 balu vidurkio" << endl;
+			cout << "duomenys talpinami i sesis <T> tipo konteinerius. Vector, Deque ir List, kiekvieno po du;" << endl;
+			cout << "3. Rusiavimas <T> tipo Vector, Deque ir List konteineriu pagal balo vidurki;" << endl;
+			cout << "4. Kiekvienas tipas irasys duomenis i fala, greitoveika matuojama tik Vector tipo konteinerio;" << endl;
+			cout << "5. Generuojamas atsitiktinis studento: Vardas, Pavarde" << endl;
+			cout << "6. Generuojamas atsitiktinis egzamino balas" << endl;
+			cout << "7. Studentu kieki: " << stqty << endl;
+			cout << "8. Namu darbu kieki: " << ndqty << endl;
+			cout << "\nProgramos greitoveikos matavimao rezultatai." << endl;
+
+			cout << "\nVector tipo objektu failo generavimas, is " << stqty << " eiluciu ir " << ndqty + 3 << " stulpeliu laikas: " << rnd.count() << " s/n" << endl;
+			cout << "\nVector tipo failo rusiavimas, is " << stqty << " objektu " << sortL.count() << " s/n" << endl;
+			cout << "\nVectort tipo duomenu konteinerio dalinimas pagal pozimi, is " << stqty << " objektu trukme: " << spliV.count() << " s/n" << endl;
+			cout << "Deque tipo duomenu konteinerio dalinimas pagal pozimi, is " << stqty << " objektu trukme: " << splitD.count() << " s/n" << endl;
+			cout << "List tipo duomenu konteinerio dalinimas pagal pozimi, is " << stqty << " objektu trukme: " << splitL.count() << " s/n" << endl;
+
+			cout << "\nVectort tipo duomenu konteinerio rusiavimas pagal pozimy, is " << stqty << " objektu trukme: " << sortV.count() << " s/n" << endl;
+			cout << "Deque tipo duomenu konteinerio rusiavimas pagal pozimy, is " << stqty << " objektu trukme: " << sortD.count() << " s/n" << endl;
+			cout << "List tipo duomenu konteinerio rusiavimas pagal pozimy atliktas Vector konteineryje, is " << stqty << " objektu trukme: " << sortL.count() << " s/n" << endl << endl;
+			cout << "\nVector tipo duo menu irasymas i faila is " << stqty << " objektu trukme: " << streamV.count() << " s/n" << endl << endl;
+
+			system("pause");
+			system("CLS");
+
+		}
+		if (mIndex == 6) {
+			dataV.clear();
+			system("CLS");
+			cout << "\n\tDuomenis sekmingai istrinti" << endl << endl;
 			system("pause");
 			system("CLS");
 		}
-		
 	}
 };
