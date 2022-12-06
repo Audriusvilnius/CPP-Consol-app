@@ -30,46 +30,55 @@ duomenys talpinami i sesis <T> tipo konteinerius. Vector, Deque ir List, kiekvie
 1. Vector tipo objektu failo generavimas, is 1000 eiluciu ir 33 stulpeliu laikas: 0.0987275 s/n
 2. Vector tipo objektu failo generavimas, is 10000 eiluciu ir 18 stulpeliu laikas: 0.790674 s/n
 3. Vector tipo objektu failo generavimas, is 1000000 eiluciu ir 23 stulpeliu laikas: 87.7151 s/n
+4. Vector tipo objektu failo generavimas, is 10000000 eiluciu ir 8 stulpeliu laikas: 677.175 s/n
 
   #### Vector tipo failo rusiavimas:
 1. Vector tipo failo rusiavimas, is 1000 objektu 0.0319004 s/n
 2. Vector tipo failo rusiavimas, is 10000 objektu 0.365863 s/n
 3. Vector tipo failo rusiavimas, is 1000000 objektu 27.1117 s/n
+4. Vector tipo failo rusiavimas, is 10000000 objektu 264.066 s/n
 
   #### Vector tipo failo dalinimas pagal pozimy:
 1. Vectort tipo duomenu konteinerio dalinimas pagal pozimi, is 1000 objektu trukme: 0.017874 s/n
 2. Vectort tipo duomenu konteinerio dalinimas pagal pozimi, is 10000 objektu trukme: 0.14974 s/n
 3. Vectort tipo duomenu konteinerio dalinimas pagal pozimi, is 1000000 objektu trukme: 18.6625 s/n
+4. Vectort tipo duomenu konteinerio dalinimas pagal pozimi, is 10000000 objektu trukme: 127.273 s/n
   
   #### Deque tipo failo dalinimas pagal pozimy:
 1. Deque tipo duomenu konteinerio dalinimas pagal pozimi, is 1000 objektu trukme: 0.00398871 s/n
 2. Deque tipo duomenu konteinerio dalinimas pagal pozimi, is 10000 objektu trukme: 0.0398127 s/n
 3. Deque tipo duomenu konteinerio dalinimas pagal pozimi, is 1000000 objektu trukme: 4.33691 s/n
+4. Deque tipo duomenu konteinerio dalinimas pagal pozimi, is 10000000 objektu trukme: 56.3275 s/n
   
   #### List tipo failo dalinimas pagal pozimy:
 1. List tipo duomenu konteinerio dalinimas pagal pozimi, is 1000 objektu trukme: 0.00373546 s/n
 2. List tipo duomenu konteinerio dalinimas pagal pozimi, is 10000 objektu trukme: 0.0375128 s/n
 3. List tipo duomenu konteinerio dalinimas pagal pozimi, is 1000000 objektu trukme: 4.44062 s/n
+4. List tipo duomenu konteinerio dalinimas pagal pozimi, is 10000000 objektu trukme: 55.8824 s/n
   
   #### Vectort tipo duomenu konteinerio rusiavimas pagal pozimy:
 1. Vectort tipo duomenu konteinerio rusiavimas pagal pozimy, is 1000 objektu trukme: 0.00932929 s/n
 2. Vectort tipo duomenu konteinerio rusiavimas pagal pozimy, is 10000 objektu trukme: 0.0938672 s/n
 3. Vectort tipo duomenu konteinerio rusiavimas pagal pozimy, is 1000000 objektu trukme: 3.22944 s/n
-  
+4. Vectort tipo duomenu konteinerio rusiavimas pagal pozimy, is 10000000 objektu trukme: 30.3902 s/n
+
   #### Deque tipo duomenu konteinerio rusiavimas pagal pozimy:
 1. Deque tipo duomenu konteinerio rusiavimas pagal pozimy, is 1000 objektu trukme: 0.00958662 s/n
 2. Deque tipo duomenu konteinerio rusiavimas pagal pozimy, is 10000 objektu trukme: 0.104002 s/n
 3. Deque tipo duomenu konteinerio rusiavimas pagal pozimy, is 1000000 objektu trukme: 4.33147 s/n
+4. Deque tipo duomenu konteinerio rusiavimas pagal pozimy, is 10000000 objektu trukme: 40.0899 s/n
 
   #### List tipo duomenu konteinerio rusiavimas pagal pozimy:
 1. List tipo duomenu konteinerio rusiavimas pagal pozimy atliktas Vector konteineryje, is 1000 objektu trukme: 0.0319004 s/n
 2. List tipo duomenu konteinerio rusiavimas pagal pozimy atliktas Vector konteineryje, is 10000 objektu trukme: 0.365863 s/n
 3. List tipo duomenu konteinerio rusiavimas pagal pozimy atliktas Vector konteineryje, is 1000000 objektu trukme: 27.1117 s/n
+4. List tipo duomenu konteinerio rusiavimas pagal pozimy atliktas Vector konteineryje, is 10000000 objektu trukme: 264.066 s/n
 
   #### Vector tipo duo menu irasymas i faila:
 1. Vector tipo duo menu irasymas i faila is 1000 objektu trukme: 0.0181975 s/n
 2. Vector tipo duo menu irasymas i faila is 10000 objektu trukme: 0.16294 s/n
 3. Vector tipo duo menu irasymas i faila is 1000000 objektu trukme: 16.2968 s/n
+4. Vector tipo duo menu irasymas i faila is 10000000 objektu trukme: 130.292 s/n
 
 
 #### Matavivai ir skaiciavimai atliekami su:
