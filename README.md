@@ -60,8 +60,8 @@ duomenys talpinami i sesis <T> tipo konteinerius. Vector, Deque ir List, kiekvie
 1. Deque tipo duomenu konteinerio rusiavimas pagal pozimy, is 1000 objektu trukme: 0.00958662 s/n
 2. Deque tipo duomenu konteinerio rusiavimas pagal pozimy, is 10000 objektu trukme: 0.104002 s/n
 3. Deque tipo duomenu konteinerio rusiavimas pagal pozimy, is 1000000 objektu trukme: 4.33147 s/n
-  
-   #### List tipo duomenu konteinerio rusiavimas pagal pozimy:
+
+  #### List tipo duomenu konteinerio rusiavimas pagal pozimy:
 1. List tipo duomenu konteinerio rusiavimas pagal pozimy atliktas Vector konteineryje, is 1000 objektu trukme: 0.0319004 s/n
 2. List tipo duomenu konteinerio rusiavimas pagal pozimy atliktas Vector konteineryje, is 10000 objektu trukme: 0.365863 s/n
 3. List tipo duomenu konteinerio rusiavimas pagal pozimy atliktas Vector konteineryje, is 1000000 objektu trukme: 27.1117 s/n
