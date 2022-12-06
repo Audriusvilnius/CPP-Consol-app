@@ -443,14 +443,14 @@ int main()
 			cout << "Matuojama atskirai kiekvieno <T> tipo konteinerio greitoveika." << endl;
 			cout << "1. Kuriamas atsitiktiniu duomenu sarasas, kuriamai objektai ir atliekami skaiciavimai;" << endl;
 			cout << "2. Saras <T> Vector konteineris skaidomas i dvi dalis pagal pozimi, 5 balu vidurkio ir virs 5 balu vidurkio" << endl;
-			cout << "duomenys talpinami i sesis <T> tipo konteinerius. Vector, Deque ir List, kiekvieno po du;" << endl;
+			cout << "duomenys talpinami i sesis <T> tipo konteinerius. Vector, Deque ir List, kiekvienom po du;" << endl;
 			cout << "3. Rusiavimas <T> tipo Vector, Deque ir List konteineriu pagal balo vidurki;" << endl;
 			cout << "4. Kiekvienas tipas irasys duomenis i fala, greitoveika matuojama tik Vector tipo konteinerio;" << endl;
 			cout << "5. Generuojamas atsitiktinis studento: Vardas, Pavarde" << endl;
 			cout << "6. Generuojamas atsitiktinis egzamino balas" << endl;
 			cout << "7. Studentu kieki: " << stqty << endl;
 			cout << "8. Namu darbu kieki: " << ndqty << endl;
-			cout << "\nProgramos greitoveikos matavimao rezultatai." << endl;
+			cout << "\nProgramos greitoveikos matavimao rezultatai:" << endl;
 
 			cout << "\nVector tipo objektu failo generavimas, is " << stqty << " eiluciu ir " << ndqty + 3 << " stulpeliu laikas: " << rnd.count() << " s/n" << endl;
 			cout << "\nVector tipo failo rusiavimas, is " << stqty << " objektu " << sortL.count() << " s/n" << endl;
