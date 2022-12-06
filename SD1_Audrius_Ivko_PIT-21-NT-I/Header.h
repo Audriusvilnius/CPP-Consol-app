@@ -11,11 +11,14 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
+#include <stdlib.h>
 #include <algorithm>
 #include <exception>
-#include <stdlib.h>
+#include <deque>;
+#include <iterator>
+#include <chrono>
 
-//#include <ofstream>
+
 
 using	std::cout;
 using	std::cin;
@@ -27,7 +30,6 @@ using	std::left;
 using	std::right;
 using	std::string;
 using	std::vector;
-using	std::list;
 using	std::ostream;
 using	std::istream;
 using	std::sort;
@@ -36,4 +38,8 @@ using	std::ifstream;
 using	std::istringstream;
 using	std::to_string;
 using	std::runtime_error;
+using	std::list;
+using	std::deque;
 using	std::ofstream;
+
+using namespace	std::chrono;
