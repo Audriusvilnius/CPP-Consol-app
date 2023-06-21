@@ -1,6 +1,4 @@
-# Savarankiskas darbas - SD1_Audrius_Ivko_PIT-21-NT-I
-
-## Programa skirta studentu iverciu skaiciavimui. Atliakamaas namu darbu ir egzaminu rezulatatu skaiciavimas pagal vidurki ir pagal mediana. Galimi skaiciavimu variantai. Matuojama programos greitoveika kuriant duomenu failus, skaidant duomanu failus, rusiuojant duomenu failus. Naudojami skirtingu tipu duomenu saugojimo <T> tipo konteineriai. Pateikiami graitoveikos matavimai
+# Programa skirta studentu iverciu skaiciavimui. Atliakamaas namu darbu ir egzaminu rezulatatu skaiciavimas pagal vidurki ir pagal mediana. Galimi skaiciavimu variantai. Matuojama programos greitoveika kuriant duomenu failus, skaidant duomanu failus, rusiuojant duomenu failus. Naudojami skirtingu tipu duomenu saugojimo <T> tipo konteineriai. Pateikiami graitoveikos matavimai
 1. Namu darbu vidutinis ivertinimas
 2. Namu darbu medianas vertinimu
 3. Namu darbu ir egzamino vidutinis ivertinimas
